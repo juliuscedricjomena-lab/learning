@@ -1,160 +1,48 @@
- <?php 
+<?php 
 require_once __DIR__ . '/../components/activity-panel.php';
 require_once __DIR__ . '/../components/controls.php';
 
 $data = [
     [
         'id' => 1,
-        'word' => 'weather',
-        'sound' => 'sounds/weather.mp3',
-        'options' => [
-            [
-                'id' => 1,
-                'text' => '달',
-                'flag' => false
-            ],
-            [
-                'id' => 2,
-                'text' => '날씨',
-                'flag' => true
-            ],
-            [
-                'id' => 3,
-                'text' => '별',
-                'flag' => false
-            ]
+        'image' => 'images/gallery/image1.png',
+        'words' => [
+           [
+            'id' => 1,
+            'order' => 3,
+            'sentence' => 'who studies the weather'
+           ],
+           [
+            'id' => 2,
+            'order' => 1,
+            'sentence' => 'A meteorologist'
+           ],
+           [
+            'id' => 3,
+            'order' => 2,
+            'sentence' => 'is a scientist'
+           ]
         ]
     ],
     [
         'id' => 2,
-        'word' => 'satellites',
-        'sound' => 'sounds/satellites.mp3',
-        'options' => [
-            [
-                'id' => 1,
-                'text' => '구름',
-                'flag' => false
-            ],
-            [
-                'id' => 2,
-                'text' => '인공위성',
-                'flag' => true
-            ],
-            [
-                'id' => 3,
-                'text' => '하늘',
-                'flag' => false
-            ]
-        ]
-    ],
-    [
-        'id' => 3,
-        'word' => 'temperature',
-        'sound' => 'sounds/temperature.mp3',
-        'options' => [
-            [
-                'id' => 1,
-                'text' => '바람',
-                'flag' => false
-            ],
-            [
-                'id' => 2,
-                'text' => '습도',
-                'flag' => false
-            ],
-            [
-                'id' => 3,
-                'text' => '온도',
-                'flag' => true
-            ]
-        ]
-    ],
-     [
-        'id' => 4,
-        'word' => 'humidity',
-        'sound' => 'sounds/humidity.mp3',
-        'options' => [
-            [
-                'id' => 1,
-                'text' => '태양',
-                'flag' => false
-            ],
-            [
-                'id' => 2,
-                'text' => '기온',
-                'flag' => false
-            ],
-            [
-                'id' => 3,
-                'text' => '습도',
-                'flag' => true
-            ]
-        ]
-    ],
-    [
-        'id' => 5,
-        'word' => 'atmosphere',
-        'sound' => 'sounds/atmosphere.mp3',
-        'options' => [
-            [
-                'id' => 1,
-                'text' => '날씨',
-                'flag' => false
-            ],
-            [
-                'id' => 2,
-                'text' => '대기',
-                'flag' => true
-            ],
-            [
-                'id' => 3,
-                'text' => '온도',
-                'flag' => false
-            ]
-        ]
-    ],
-    [
-        'id' => 6,
-        'word' => 'precipitation',
-        'sound' => 'sounds/precipitation.mp3',
-        'options' => [
-            [
-                'id' => 1,
-                'text' => '구름',
-                'flag' => false
-            ],
-            [
-                'id' => 2,
-                'text' => '습도',
-                'flag' => false
-            ],
-            [
-                'id' => 3,
-                'text' => '강수',
-                'flag' => true
-            ]
-        ]
-    ],
-    [
-        'id' => 7,
-        'word' => 'wind',
-        'sound' => 'sounds/wind.mp3',
-        'options' => [
-            [
-                'id' => 1,
-                'text' => '강수',
-                'flag' => false
-            ],
-            [
-                'id' => 2,
-                'text' => '바람',
-                'flag' => true
-            ],
-            [
-                'id' => 3,
-                'text' => '인공위성',
-                'flag' => false
-            ]
+        'image' => 'images/gallery/image1.png',
+        'words' => [
+           [
+            'id' => 4,
+            'order' => 3,
+            'sentence' => 'for predicting the weather'
+           ],
+           [
+            'id' => 5,
+            'order' => 1,
+            'sentence' => 'Computers'
+           ],
+           [
+            'id' => 6,
+            'order' => 2,
+            'sentence' => 'are very important'
+           ]
         ]
     ]
 ];
@@ -162,37 +50,26 @@ $data = [
 <div class="page-content">
     <img src="<?php echo BASE_PATH; ?>images/prev-btn.png" alt="Previous" class="nav-btn">
     <div class="content-wrapper">
-        <?php startActivityPanel('Activity 6: Sound Mapping', 'Listen and choose the korean meaning.'); ?>
+        <?php startActivityPanel('Activity 6: Sentence Order Recall', 'Drag the sentences into the correct order.'); ?>
             <div class="panel-content-wrapper">
-                <div class="panel-left">
-                    <div class="sentence-card h70p padding-10" id="wordCard">
-                        <div class="sentence-card-text border-radius-35">
-                            <div class="header-word" id="baseWord"><?php echo $data[0]['word']; ?></div>
-                            <button class="play-sentence-btn" id="playWordBtn">
-                                <img src="<?php echo BASE_PATH; ?>images/icons/eye-icon.png" alt="Eye" class="play-sentence-icon">
-                                <span>Play</span>
-                            </button>
+                <div class="activity-content-flex">
+                    <div class="activity-image-container">
+                        <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Activity Image" id="activityImage">
+                    </div>
+                    <div class="sentence-description">
+                        <div class="draggable-words" id="draggableWords">
+                            <?php foreach($data[0]['words'] as $word): ?>
+                                <div class="word-item" data-order="<?php echo $word['order']; ?>">
+                                    <?php echo $word['sentence']; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="drop-zones">
+                            <div class="drop-zone" data-position="1">1</div>
+                            <div class="drop-zone" data-position="2">2</div>
+                            <div class="drop-zone" data-position="3">3</div>
                         </div>
                     </div>
-                    <div class="options-container" id="optionsContainer" style="display: none;">
-                        <?php foreach($data[0]['options'] as $option): ?>
-                        <button class="option-btn" data-flag="<?php echo $option['flag'] ? 'true' : 'false'; ?>">
-                            <div class="option-text"><?php echo $option['text']; ?></div>
-                        </button>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <div class="panel-right" id="panelRight">
-                    <img src="<?php echo BASE_PATH; ?>images/sentence-list.png" alt="Word List" class="sentence-list-logo">
-                    <img src="<?php echo BASE_PATH; ?>images/collapse-btn.png" alt="Collapse" class="collapse-btn" id="collapseBtn">
-                    <ul class="sentence-list">
-                        <?php foreach($data as $index => $item): ?>
-                        <li data-index="<?php echo $index; ?>"><?php echo $item['word']; ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-                <div class="panel-collapsed" id="panelCollapsed" style="display: none;">
-                    <img src="<?php echo BASE_PATH; ?>images/expand-btn.png" alt="Expand" class="expand-btn" id="expandBtn">
                 </div>
             </div>
         <?php endActivityPanel(); ?>
@@ -229,89 +106,169 @@ $data = [
 <script>
 const wordData = <?php echo json_encode($data); ?>;
 let currentIndex = 0;
+let draggedElement = null;
 
-function updateWord(index) {
-    const baseWord = document.getElementById('baseWord');
-    const optionsContainer = document.getElementById('optionsContainer');
+function updateActivity() {
+    const activityImage = document.getElementById('activityImage');
+    const draggableWords = document.getElementById('draggableWords');
+    const dropZones = document.querySelectorAll('.drop-zone');
     
-    if (baseWord && wordData[index]) {
-        baseWord.textContent = wordData[index].word;
-        optionsContainer.style.display = 'none';
-        
-        optionsContainer.innerHTML = '';
-        wordData[index].options.forEach(option => {
-            const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.setAttribute('data-flag', option.flag ? 'true' : 'false');
-            btn.innerHTML = `<div class="option-text">${option.text}</div>`;
-            btn.addEventListener('click', handleOptionClick);
-            optionsContainer.appendChild(btn);
-        });
-    }
+    activityImage.src = '<?php echo BASE_PATH; ?>' + wordData[currentIndex].image;
+    
+    draggableWords.innerHTML = wordData[currentIndex].words.map(word => 
+        `<div class="word-item" data-order="${word.order}">${word.sentence}</div>`
+    ).join('');
+    
+    dropZones.forEach(zone => {
+        zone.innerHTML = zone.dataset.position;
+        zone.classList.remove('filled', 'correct', 'incorrect');
+    });
+    
+    initDragAndDrop();
 }
 
-function handleOptionClick(e) {
-    const btn = e.currentTarget;
-    const isCorrect = btn.getAttribute('data-flag') === 'true';
-    const optionText = btn.querySelector('.option-text');
-    optionText.style.background = isCorrect ? '#4CAF50' : '#F44336';
-    optionText.style.color = 'white';
+function initDragAndDrop() {
+    const dropZones = document.querySelectorAll('.drop-zone');
+    const wordItems = document.querySelectorAll('.word-item');
+    let isDragging = false;
+    
+    if (wordItems.length > 0) {
+        const firstItem = wordItems[0];
+        const rect = firstItem.getBoundingClientRect();
+        const itemWidth = rect.width + 'px';
+        const itemHeight = rect.height + 'px';
+        
+        dropZones.forEach(zone => {
+            zone.style.width = itemWidth;
+            zone.style.minHeight = itemHeight;
+        });
+    }
+    
+    document.addEventListener('mousedown', handleStart);
+    document.addEventListener('touchstart', handleStart);
+    
+    function checkAllCorrect() {
+        const allCorrect = Array.from(dropZones).every(zone => zone.classList.contains('correct'));
+        if (allCorrect && currentIndex < wordData.length - 1) {
+            // setTimeout(() => {
+                // currentIndex++;
+                // updateActivity();
+            // }, 500);
+        }
+    }
+    
+    function handleStart(event) {
+        const option = event.target.closest('.word-item');
+        if (!option || isDragging) return;
+        
+        const parentZone = option.closest('.drop-zone');
+        if (parentZone && parentZone.classList.contains('correct')) return;
+        
+        isDragging = true;
+        event.preventDefault();
+        
+        if (parentZone) {
+            parentZone.classList.remove('filled', 'correct', 'incorrect');
+        }
+        
+        let currentDroppable = null;
+        let rect = option.getBoundingClientRect();
+        let clientX = event.clientX || event.touches[0].clientX;
+        let clientY = event.clientY || event.touches[0].clientY;
+        let shiftX = clientX - rect.left;
+        let shiftY = clientY - rect.top;
+        
+        const currentWidth = rect.width + 'px';
+        const currentHeight = rect.height + 'px';
+        
+        option.style.position = 'absolute';
+        option.style.zIndex = 1000;
+        option.style.width = currentWidth;
+        option.classList.add('dragging');
+        document.body.append(option);
+        
+        moveAt(clientX, clientY);
+        
+        function moveAt(clientX, clientY) {
+            option.style.left = clientX - shiftX + 'px';
+            option.style.top = clientY - shiftY + 'px';
+        }
+        
+        function onMove(event) {
+            let moveClientX = event.clientX || event.touches[0].clientX;
+            let moveClientY = event.clientY || event.touches[0].clientY;
+            
+            moveAt(moveClientX, moveClientY);
+            
+            option.hidden = true;
+            let elemBelow = document.elementFromPoint(moveClientX, moveClientY);
+            option.hidden = false;
+            
+            if (!elemBelow) return;
+            
+            let droppableBelow = elemBelow.closest('.drop-zone');
+            
+            if (currentDroppable != droppableBelow) {
+                if (currentDroppable) currentDroppable.classList.remove('drag-over');
+                currentDroppable = droppableBelow;
+                if (currentDroppable) currentDroppable.classList.add('drag-over');
+            }
+        }
+        
+        function endDrag() {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('touchmove', onMove);
+            document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchend', endDrag);
+            
+            option.classList.remove('dragging');
+            option.style.position = '';
+            option.style.zIndex = '';
+            option.style.left = '';
+            option.style.top = '';
+            option.style.width = '';
+            
+            if (currentDroppable && !currentDroppable.querySelector('.word-item')) {
+                currentDroppable.classList.remove('drag-over');
+                currentDroppable.innerHTML = '';
+                currentDroppable.appendChild(option);
+                currentDroppable.classList.add('filled');
+                
+                const correctOrder = parseInt(option.dataset.order);
+                const droppedPosition = parseInt(currentDroppable.dataset.position);
+                
+                if (correctOrder === droppedPosition) {
+                    currentDroppable.classList.add('correct');
+                    checkAllCorrect();
+                } else {
+                    currentDroppable.classList.add('incorrect');
+                }
+            } else {
+                document.getElementById('draggableWords').appendChild(option);
+            }
+            
+            dropZones.forEach(z => z.classList.remove('drag-over'));
+            isDragging = false;
+        }
+        
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('touchmove', onMove);
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.querySelector('.nav-btn[alt="Previous"]');
     const nextBtn = document.querySelector('.nav-btn[alt="Next"]');
-    const wordListItems = document.querySelectorAll('.sentence-list li');
-    const playWordBtn = document.getElementById('playWordBtn');
-    const optionsContainer = document.getElementById('optionsContainer');
     
-    if (playWordBtn) {
-        playWordBtn.addEventListener('click', function() {
-            const btnText = playWordBtn.querySelector('span');
-            btnText.textContent = 'Playing...';
-            playWordBtn.disabled = true;
-            
-            const audio = new Audio(wordData[currentIndex].sound);
-            audio.play();
-            audio.onended = function() {
-                optionsContainer.style.display = 'flex';
-                btnText.textContent = 'Play';
-                playWordBtn.disabled = false;
-            };
-        });
-    }
-    
-    function setActiveWord(index) {
-        wordListItems.forEach((item, i) => {
-            if (i === index) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-    }
-    
-    setActiveWord(0);
-    
-    document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.addEventListener('click', handleOptionClick);
-    });
-    
-    wordListItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            currentIndex = index;
-            updateWord(currentIndex);
-            setActiveWord(currentIndex);
-        });
-    });
+    initDragAndDrop();
     
     if (prevBtn) {
         prevBtn.addEventListener('click', function() {
             if (currentIndex > 0) {
                 currentIndex--;
-                updateWord(currentIndex);
-                setActiveWord(currentIndex);
+                updateActivity();
             }
         });
     }
@@ -320,8 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
         nextBtn.addEventListener('click', function() {
             if (currentIndex < wordData.length - 1) {
                 currentIndex++;
-                updateWord(currentIndex);
-                setActiveWord(currentIndex);
+                updateActivity();
             }
         });
     }

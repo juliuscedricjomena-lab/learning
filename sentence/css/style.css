@@ -1526,3 +1526,70 @@ a.card {
 .mic-dropdown:hover {
     background: #FFF5E6;
 }
+
+.draggable-words {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.word-item {
+    padding: 15px 25px;
+    background: white;
+    border: 2px solid #EC8F24;
+    border-radius: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: move;
+    transition: transform 0.2s;
+}
+
+.word-item:hover {
+    transform: scale(1.05);
+}
+
+.word-item.dragging {
+    opacity: 0.5;
+}
+
+.drop-zones {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.drop-zone {
+    border: 3px dashed #ccc;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: #ccc;
+    transition: all 0.3s;
+}
+
+.drop-zone.drag-over {
+    border-color: #EC8F24;
+    background: #FFF5E6;
+}
+
+.drop-zone.filled {
+    border-style: solid;
+    border-color: #EC8F24;
+}
+
+.drop-zone .word-item {
+    cursor: default;
+    border: none;
+}
+
+.drop-zone.correct .word-item {
+    color: blue;
+}
+
+.drop-zone.incorrect .word-item {
+    color: red;
+}
