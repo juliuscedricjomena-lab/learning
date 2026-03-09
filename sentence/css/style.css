@@ -1016,6 +1016,38 @@ a.card {
     font-weight: bold;
 }
 
+.sentence-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.input-group label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    min-width: 30px;
+    flex-shrink: 0;
+}
+
+.sentence-input {
+    flex: 1;
+    padding: 15px 20px;
+    font-size: 22px;
+    border: 2px solid #EC8F24;
+    border-radius: 15px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+}
+
 .options-container {
     display: flex;
     gap: 20px;
@@ -1262,7 +1294,7 @@ a.card {
 
 .scoreboard-header {
     display: grid;
-    grid-template-columns: 80px 1fr 150px 200px;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     font-weight: bold;
     color: white;
@@ -1272,7 +1304,7 @@ a.card {
 
 .scoreboard-row {
     display: grid;
-    grid-template-columns: 80px 1fr 150px 200px;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     font-size: 18px;
     margin-bottom: 10px;
@@ -1366,9 +1398,8 @@ a.card {
 }
 
 .submit-btn {
-    position: absolute;
-    bottom: 0;
-    right: -17%;
+    display: block;
+    margin: 20px auto 0;
     background: #EC8F24;
     color: white;
     border: none;
@@ -1448,6 +1479,14 @@ a.card {
 
 #recordingsModal .modal-btn {
     flex: 0;
+}
+
+.typing-input  {
+    padding: 10px;
+    border-radius: 25px;
+    min-height: 150px;
+    margin-top: 20px;
+    background-color: #E9E9E9;
 }
 
 .modal-btn {
@@ -1535,8 +1574,7 @@ a.card {
 }
 
 .word-item {
-    padding: 15px 25px;
-    background: white;
+    padding: 5px 10px;
     border: 2px solid #EC8F24;
     border-radius: 25px;
     font-size: 22px;
@@ -1560,7 +1598,8 @@ a.card {
 }
 
 .drop-zone {
-    border: 3px dashed #ccc;
+    border: 3px solid #ccc;
+    background-color: #ffb866;
     border-radius: 25px;
     display: flex;
     align-items: center;

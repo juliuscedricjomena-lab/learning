@@ -64,10 +64,10 @@ $data = [
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                        <div class="drop-zones">
-                            <div class="drop-zone" data-position="1">1</div>
-                            <div class="drop-zone" data-position="2">2</div>
-                            <div class="drop-zone" data-position="3">3</div>
+                        <div class="drop-zones" id="dropZones">
+                            <div class="drop-zone" data-position="1"></div>
+                            <div class="drop-zone" data-position="2"></div>
+                            <div class="drop-zone" data-position="3"></div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ let draggedElement = null;
 function updateActivity() {
     const activityImage = document.getElementById('activityImage');
     const draggableWords = document.getElementById('draggableWords');
-    const dropZones = document.querySelectorAll('.drop-zone');
+    const dropZonesContainer = document.getElementById('dropZones');
     
     activityImage.src = '<?php echo BASE_PATH; ?>' + wordData[currentIndex].image;
     
@@ -119,10 +119,9 @@ function updateActivity() {
         `<div class="word-item" data-order="${word.order}">${word.sentence}</div>`
     ).join('');
     
-    dropZones.forEach(zone => {
-        zone.innerHTML = zone.dataset.position;
-        zone.classList.remove('filled', 'correct', 'incorrect');
-    });
+    dropZonesContainer.innerHTML = wordData[currentIndex].words.map((_, index) => 
+        `<div class="drop-zone" data-position="${index + 1}"></div>`
+    ).join('');
     
     initDragAndDrop();
 }
@@ -144,21 +143,23 @@ function initDragAndDrop() {
         });
     }
     
-    document.addEventListener('mousedown', handleStart);
-    document.addEventListener('touchstart', handleStart);
-    
     function checkAllCorrect() {
         const allCorrect = Array.from(dropZones).every(zone => zone.classList.contains('correct'));
         if (allCorrect && currentIndex < wordData.length - 1) {
-            // setTimeout(() => {
-                // currentIndex++;
-                // updateActivity();
-            // }, 500);
+            setTimeout(() => {
+                currentIndex++;
+                updateActivity();
+            }, 500);
         }
     }
     
+    wordItems.forEach(option => {
+        option.addEventListener('mousedown', handleStart);
+        option.addEventListener('touchstart', handleStart);
+    });
+    
     function handleStart(event) {
-        const option = event.target.closest('.word-item');
+        const option = event.currentTarget;
         if (!option || isDragging) return;
         
         const parentZone = option.closest('.drop-zone');

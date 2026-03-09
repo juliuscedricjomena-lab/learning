@@ -1,85 +1,77 @@
- <?php 
+<?php 
 require_once __DIR__ . '/../components/activity-panel.php';
 require_once __DIR__ . '/../components/controls.php';
 
 $data = [
     [
         'id' => 1,
-        'word' => 'weather',
-        'description' => 'The weather is windy.'
+        'image' => 'images/gallery/image1.png',
+        'sentences' => [
+            [
+                'subject' => 'A meteorologist',
+                'predicate' => 'is a scientist',
+                'modifier' => 'who studies the weather'
+            ],
+            [
+                'subject' => 'Computers',
+                'predicate' => 'are very important',
+                'modifier' => 'for predicting the weather'
+            ],
+            [
+                'subject' => 'Weather forecasts',
+                'predicate' => 'help keep',
+                'modifier' => 'people safe'
+            ]
+        ],
     ],
     [
         'id' => 2,
-        'word' => 'satellites',
-        'description' => 'Satellites orbit the Earth.'
-    ],
-    [
-        'id' => 3,
-        'word' => 'temperature',
-        'description' => 'The temperature is rising.'
-    ],
-     [
-        'id' => 4,
-        'word' => 'humidity',
-        'description' => 'Humidity makes the air feel warmer.'
-    ],
-    [
-        'id' => 5,
-        'word' => 'atmosphere',
-        'description' => 'The atmosphere is the layer of gases surrounding Earth.'
-    ],
-    [
-        'id' => 6,
-        'word' => 'precipitation',
-        'description' => 'Precipitation includes rain, snow, and hail.'
-    ],
-     [
-        'id' => 7,
-        'word' => 'wind',
-        'description' => 'The wind is blowing strongly.'
-    ],
-    [
-        'id' => 8,
-        'word' => 'climate',
-        'description' => 'Climate refers to long-term weather patterns.'
-    ],
-    [
-        'id' => 9,
-        'word' => 'forecast',
-        'description' => 'The forecast predicts rain tomorrow.'
-    ],
-    [
-        'id' => 10,
-        'word' => 'storm',
-        'description' => 'A storm is approaching the city.'
+        'image' => 'images/gallery/image1.png',
+        'sentences' => [
+            [
+                'subject' => 'The sun',
+                'predicate' => 'rises',
+                'modifier' => 'in the east'
+            ],
+            [
+                'subject' => 'Birds',
+                'predicate' => 'sing beautifully',
+                'modifier' => 'in the morning'
+            ],
+            [
+                'subject' => 'Children',
+                'predicate' => 'play happily',
+                'modifier' => 'in the park'
+            ]
+        ],
     ]
 ];
 ?>
 <div class="page-content">
     <img src="<?php echo BASE_PATH; ?>images/prev-btn.png" alt="Previous" class="nav-btn">
     <div class="content-wrapper">
-        <?php startActivityPanel('Activity 7: Sentence Awareness', 'Read the sentence carefully.'); ?>
+        <?php startActivityPanel('Activity 3: Phrase Practice', 'Copy each phrase correctly.'); ?>
             <div class="panel-content-wrapper">
-                <div class="panel-left">
-                    <div class="sentence-card h100p padding-10" id="wordCard">
-                        <div class="sentence-card-text border-radius-35">
-                            <div class="sentence-sentence" id="wordDescription">
-                                <?php echo $data[0]['id']; ?>. <?php echo $data[0]['description']; ?>
+                <div class="activity-content-flex">
+                    <div class="activity-image-container">
+                        <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Activity Image" id="activityImage">
+                    </div>
+                    <div class="sentence-description">
+                        <div class="sentence-inputs">
+                            <div class="input-group">
+                                <label>1.</label>
+                                <input type="text" id="input1" class="sentence-input" placeholder="Type your answer here">
+                            </div>
+                            <div class="input-group">
+                                <label>2.</label>
+                                <input type="text" id="input2" class="sentence-input" placeholder="Type your answer here">
+                            </div>
+                            <div class="input-group">
+                                <label>3.</label>
+                                <input type="text" id="input3" class="sentence-input" placeholder="Type your answer here">
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel-right" id="panelRight">
-                    <img src="<?php echo BASE_PATH; ?>images/sentence-list.png" alt="Word List" class="sentence-list-logo">
-                    <img src="<?php echo BASE_PATH; ?>images/collapse-btn.png" alt="Collapse" class="collapse-btn" id="collapseBtn">
-                    <ul class="sentence-list">
-                        <?php foreach($data as $index => $item): ?>
-                        <li data-index="<?php echo $index; ?>"><?php echo $item['word']; ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-                <div class="panel-collapsed" id="panelCollapsed" style="display: none;">
-                    <img src="<?php echo BASE_PATH; ?>images/expand-btn.png" alt="Expand" class="expand-btn" id="expandBtn">
                 </div>
             </div>
         <?php endActivityPanel(); ?>
@@ -116,66 +108,81 @@ $data = [
 <script>
 const wordData = <?php echo json_encode($data); ?>;
 let currentIndex = 0;
+let currentSentenceIndex = 0;
+const userAnswers = {};
 
-function updateWord(index) {
-    const wordDescription = document.getElementById('wordDescription');
+function updateSentence() {
+    const activityImage = document.getElementById('activityImage');
+    const input1 = document.getElementById('input1');
+    const input2 = document.getElementById('input2');
+    const input3 = document.getElementById('input3');
     
-    if (wordDescription && wordData[index]) {
-        wordDescription.textContent = `${wordData[index].id}. ${wordData[index].description}`;
+    if (wordData[currentIndex] && wordData[currentIndex].sentences[currentSentenceIndex]) {
+        activityImage.src = '<?php echo BASE_PATH; ?>' + wordData[currentIndex].image;
+        
+        const key = `${currentIndex}-${currentSentenceIndex}`;
+        input1.value = userAnswers[key]?.input1 || '';
+        input2.value = userAnswers[key]?.input2 || '';
+        input3.value = userAnswers[key]?.input3 || '';
+        
+        checkInputs();
     }
 }
 
-function handleOptionClick(e) {
-    const btn = e.currentTarget;
-    const isCorrect = btn.getAttribute('data-flag') === 'true';
-    const optionText = btn.querySelector('.option-text');
-    optionText.style.background = isCorrect ? '#4CAF50' : '#F44336';
-    optionText.style.color = 'white';
+function saveAnswers() {
+    const key = `${currentIndex}-${currentSentenceIndex}`;
+    userAnswers[key] = {
+        input1: document.getElementById('input1').value,
+        input2: document.getElementById('input2').value,
+        input3: document.getElementById('input3').value
+    };
+}
+
+function checkInputs() {
+    const sentence = wordData[currentIndex].sentences[currentSentenceIndex];
+    const input1 = document.getElementById('input1');
+    const input2 = document.getElementById('input2');
+    const input3 = document.getElementById('input3');
+    
+    input1.style.borderColor = input1.value === sentence.subject ? 'blue' : (input1.value === '' ? '#EC8F24' : 'red');
+    input2.style.borderColor = input2.value === sentence.predicate ? 'blue' : (input2.value === '' ? '#EC8F24' : 'red');
+    input3.style.borderColor = input3.value === sentence.modifier ? 'blue' : (input3.value === '' ? '#EC8F24' : 'red');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.querySelector('.nav-btn[alt="Previous"]');
     const nextBtn = document.querySelector('.nav-btn[alt="Next"]');
-    const wordListItems = document.querySelectorAll('.sentence-list li');
+    const input1 = document.getElementById('input1');
+    const input2 = document.getElementById('input2');
+    const input3 = document.getElementById('input3');
     
-    function setActiveWord(index) {
-        wordListItems.forEach((item, i) => {
-            if (i === index) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-    }
-    
-    setActiveWord(0);
-    
-    wordListItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            currentIndex = index;
-            updateWord(currentIndex);
-            setActiveWord(currentIndex);
-        });
-    });
+    input1.addEventListener('input', checkInputs);
+    input2.addEventListener('input', checkInputs);
+    input3.addEventListener('input', checkInputs);
     
     if (prevBtn) {
         prevBtn.addEventListener('click', function() {
-            if (currentIndex > 0) {
+            saveAnswers();
+            if (currentSentenceIndex > 0) {
+                currentSentenceIndex--;
+            } else if (currentIndex > 0) {
                 currentIndex--;
-                updateWord(currentIndex);
-                setActiveWord(currentIndex);
+                currentSentenceIndex = wordData[currentIndex].sentences.length - 1;
             }
+            updateSentence();
         });
     }
     
     if (nextBtn) {
         nextBtn.addEventListener('click', function() {
-            if (currentIndex < wordData.length - 1) {
+            saveAnswers();
+            if (currentSentenceIndex < wordData[currentIndex].sentences.length - 1) {
+                currentSentenceIndex++;
+            } else if (currentIndex < wordData.length - 1) {
                 currentIndex++;
-                updateWord(currentIndex);
-                setActiveWord(currentIndex);
+                currentSentenceIndex = 0;
             }
+            updateSentence();
         });
     }
 });

@@ -27,71 +27,30 @@
         <div class="scoreboard-header">
             <div class="scoreboard-col">#</div>
             <div class="scoreboard-col">Activity</div>
-            <div class="scoreboard-col">Score</div>
-            <div class="scoreboard-col">Feedback</div>
+            <div class="scoreboard-col">Result</div>
         </div>
         <div class="scoreboard-row">
             <div class="scoreboard-col">1</div>
-            <div class="scoreboard-col">Meaning Hook</div>
-            <div class="scoreboard-col">0/15</div>
-            <div class="scoreboard-col">-</div>
+            <div class="scoreboard-col">Story Meaning</div>
+            <div class="scoreboard-col"><img src="./images/icons/passed-icon.png" alt="Passed" width="50"></div>
         </div>
         <div class="scoreboard-row">
             <div class="scoreboard-col">2</div>
-            <div class="scoreboard-col">Pronounciation & Chunk</div>
-            <div class="scoreboard-col">0/15</div>
-            <div class="scoreboard-col">-</div>
+            <div class="scoreboard-col">Picture Match</div>
+            <div class="scoreboard-col"><img src="./images/icons/passed-icon.png" alt="Passed" width="50"></div>
         </div>
         <div class="scoreboard-row">
             <div class="scoreboard-col">3</div>
-            <div class="scoreboard-col">Shape Memory</div>
-            <div class="scoreboard-col">0/15</div>
-            <div class="scoreboard-col">-</div>
+            <div class="scoreboard-col">True or False</div>
+            <div class="scoreboard-col"><img src="./images/icons/passed-icon.png" alt="Passed" width="50"></div>
         </div>
         <div class="scoreboard-row">
             <div class="scoreboard-col">4</div>
-            <div class="scoreboard-col">Guided Writing</div>
-            <div class="scoreboard-col">0/15</div>
-            <div class="scoreboard-col">-</div>
-        </div>
-        <div class="scoreboard-row">
-            <div class="scoreboard-col">5</div>
-            <div class="scoreboard-col">Reverse Recall</div>
-            <div class="scoreboard-col">0/15</div>
-            <div class="scoreboard-col">-</div>
-        </div>
-        <div class="scoreboard-row">
-            <div class="scoreboard-col">6</div>
-            <div class="scoreboard-col">Sound Mapping</div>
-            <div class="scoreboard-col">0/15</div>
-            <div class="scoreboard-col">-</div>
-        </div>
-        <div class="scoreboard-row">
-            <div class="scoreboard-col">7</div>
-            <div class="scoreboard-col">Sentence Awareness</div>
-            <div class="scoreboard-col">0/15</div>
-            <div class="scoreboard-col">-</div>
-        </div>
-        <div class="scoreboard-row">
-            <div class="scoreboard-col">8</div>
-            <div class="scoreboard-col">Sentence Anchor</div>
-            <div class="scoreboard-col">0/15</div>
-            <div class="scoreboard-col">-</div>
-        </div>
-        <div class="scoreboard-row">
-            <div class="scoreboard-col">9</div>
-            <div class="scoreboard-col">Sentence Expansion</div>
-            <div class="scoreboard-col">0/15</div>
-            <div class="scoreboard-col">-</div>
-        </div>
-        <div class="scoreboard-row">
-            <div class="scoreboard-col">10</div>
-            <div class="scoreboard-col">Listen and Record</div>
-            <div class="scoreboard-col">0/15</div>
-            <div class="scoreboard-col">-</div>
+            <div class="scoreboard-col">Picture Choice</div>
+            <div class="scoreboard-col"><img src="./images/icons/passed-icon.png" alt="Passed" width="50"></div>
         </div>
     </div>
-        <button class="submit-btn">Confirm</button>
-    </div>
+    <button class="submit-btn">Confirm</button>
 </div>
+
 
