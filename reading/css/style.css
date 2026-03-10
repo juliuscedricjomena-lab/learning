@@ -734,6 +734,7 @@ a.card {
     display: flex;
     gap: 0;
     position: relative;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .panel-right {
@@ -778,6 +779,7 @@ a.card {
     align-items: center;
     justify-content: center;
     min-height: 350px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .expand-btn {
@@ -1728,4 +1730,18 @@ a.card {
     font-size: 16px;
     font-weight: bold;
     flex: 1;
+}
+
+.panel-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-image {
+    max-width: 80%;
+    height: auto;
+    border-radius: 50px;
+    border: 8px solid white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }

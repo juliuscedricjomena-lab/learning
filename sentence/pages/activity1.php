@@ -32,7 +32,7 @@ $data = [
                     <div class="activity-image-container">
                         <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Activity Image">
                     </div>
-                    <div class="sentence-description" id="sentenceDescription">
+                    <div class="reading-description" id="sentenceDescription">
                         <?php 
                         foreach($data[0]['sentences'] as $num => $sentence) {
                             echo $num . '. ' . $sentence . '<br><br>';

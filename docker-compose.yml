@@ -8,3 +8,4 @@ services:
     volumes:
       - ./sentence:/var/www/html/sentence
       - ./word:/var/www/html/word
+      - ./reading:/var/www/html/reading

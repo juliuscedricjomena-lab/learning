@@ -47,7 +47,7 @@ $data = [
 <div class="page-content">
     <img src="<?php echo BASE_PATH; ?>images/prev-btn.png" alt="Previous" class="nav-btn">
     <div class="content-wrapper">
-        <?php startActivityPanel('Activity 2: Phrsase Awareness', 'Read the sentence in parts and identify each phrase’s role.'); ?>
+        <?php startActivityPanel('Activity 2: Comprehension Check', 'Read the question and choose the best answer.'); ?>
             <div class="panel-content-wrapper">
                 <div class="panel-left">
                     <div class="quiz-question" id="quizQuestion">Q1. <?php echo $data[0]['question']; ?></div>
@@ -171,13 +171,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const panelCollapsed = document.getElementById('panelCollapsed');
     
     collapseBtn?.addEventListener('click', () => {
-        document.getElementById('panelRightWrapper').style.display = 'none';
-        panelCollapsed.style.display = 'flex';
+        const wrapper = document.getElementById('panelRightWrapper');
+        wrapper.style.opacity = '0';
+        wrapper.style.transform = 'translateX(20px)';
+        setTimeout(() => {
+            wrapper.style.display = 'none';
+            panelCollapsed.style.display = 'flex';
+            setTimeout(() => {
+                panelCollapsed.style.opacity = '1';
+                panelCollapsed.style.transform = 'translateX(0)';
+            }, 10);
+        }, 300);
     });
     
     expandBtn?.addEventListener('click', () => {
-        document.getElementById('panelRightWrapper').style.display = 'flex';
-        panelCollapsed.style.display = 'none';
+        panelCollapsed.style.opacity = '0';
+        panelCollapsed.style.transform = 'translateX(-20px)';
+        setTimeout(() => {
+            panelCollapsed.style.display = 'none';
+            const wrapper = document.getElementById('panelRightWrapper');
+            wrapper.style.display = 'flex';
+            setTimeout(() => {
+                wrapper.style.opacity = '1';
+                wrapper.style.transform = 'translateX(0)';
+            }, 10);
+        }, 300);
     });
 });
 </script>

@@ -31,22 +31,17 @@
         </div>
         <div class="scoreboard-row">
             <div class="scoreboard-col">1</div>
-            <div class="scoreboard-col">Story Meaning</div>
+            <div class="scoreboard-col">Read to Learn</div>
             <div class="scoreboard-col"><img src="./images/icons/passed-icon.png" alt="Passed" width="50"></div>
         </div>
         <div class="scoreboard-row">
             <div class="scoreboard-col">2</div>
-            <div class="scoreboard-col">Picture Match</div>
+            <div class="scoreboard-col">Comprehension Check</div>
             <div class="scoreboard-col"><img src="./images/icons/passed-icon.png" alt="Passed" width="50"></div>
         </div>
         <div class="scoreboard-row">
             <div class="scoreboard-col">3</div>
-            <div class="scoreboard-col">True or False</div>
-            <div class="scoreboard-col"><img src="./images/icons/passed-icon.png" alt="Passed" width="50"></div>
-        </div>
-        <div class="scoreboard-row">
-            <div class="scoreboard-col">4</div>
-            <div class="scoreboard-col">Picture Choice</div>
+            <div class="scoreboard-col">Memory Check</div>
             <div class="scoreboard-col"><img src="./images/icons/passed-icon.png" alt="Passed" width="50"></div>
         </div>
     </div>

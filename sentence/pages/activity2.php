@@ -56,16 +56,16 @@ $data = [
                     <div class="activity-image-container">
                         <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Activity Image">
                     </div>
-                    <div class="sentence-description" id="sentenceDescription">
+                    <div class="reading-description" id="sentenceDescription">
                         <?php 
                         foreach($data[0]['sentences'] as $num => $sentence) {
-                            echo '<div class="sentence-item">';
+                            echo '<div class="reading-item">';
                             echo ($num + 1) . '. ';
-                            echo '<span class="sentence-subject">' . $sentence['subject'] . '</span>';
-                            echo ' <span class="sentence-separator">|</span> ';
-                            echo '<span class="sentence-predicate">' . $sentence['predicate'] . '</span>';
-                            echo ' <span class="sentence-separator">|</span> ';
-                            echo '<span class="sentence-modifier">' . $sentence['modifier'] . '</span>';
+                            echo '<span class="reading-subject">' . $sentence['subject'] . '</span>';
+                            echo ' <span class="reading-separator">|</span> ';
+                            echo '<span class="reading-predicate">' . $sentence['predicate'] . '</span>';
+                            echo ' <span class="reading-separator">|</span> ';
+                            echo '<span class="reading-modifier">' . $sentence['modifier'] . '</span>';
                             echo '</div>';
                         }
                         ?>
@@ -117,13 +117,13 @@ function updateWord(index) {
         let sentencesHTML = '';
         for (let num in wordData[index].sentences) {
             const sentence = wordData[index].sentences[num];
-            sentencesHTML += '<div class="sentence-item">';
+            sentencesHTML += '<div class="reading-item">';
             sentencesHTML += (parseInt(num) + 1) + '. ';
-            sentencesHTML += '<span class="sentence-subject">' + sentence.subject + '</span>';
-            sentencesHTML += ' <span class="sentence-separator">|</span> ';
-            sentencesHTML += '<span class="sentence-predicate">' + sentence.predicate + '</span>';
-            sentencesHTML += ' <span class="sentence-separator">|</span> ';
-            sentencesHTML += '<span class="sentence-modifier">' + sentence.modifier + '</span>';
+            sentencesHTML += '<span class="reading-subject">' + sentence.subject + '</span>';
+            sentencesHTML += ' <span class="reading-separator">|</span> ';
+            sentencesHTML += '<span class="reading-predicate">' + sentence.predicate + '</span>';
+            sentencesHTML += ' <span class="reading-separator">|</span> ';
+            sentencesHTML += '<span class="reading-modifier">' + sentence.modifier + '</span>';
             sentencesHTML += '</div>';
         }
         sentenceDescription.innerHTML = sentencesHTML;
