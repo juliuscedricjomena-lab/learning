@@ -63,15 +63,25 @@ $data = [
                     </button>
                     <audio id="activityAudio" src="<?php echo BASE_PATH . $data[0]['audio']; ?>"></audio>
                 </div>
-                <div class="quiz-container" style="flex: 0 0 50%;">
+                <div class="quiz-container <?php echo $data[0]['type'] === 'true_false' ? 'centered' : ''; ?>" style="flex: 0 0 50%;">
                     <div class="quiz-question" id="quizQuestion"><?php echo $data[0]['question']; ?></div>
                     <div class="quiz-options" id="quizOptions">
-                        <?php foreach($data[0]['options'] as $index => $option): ?>
-                        <div class="quiz-option" data-index="<?php echo $index; ?>">
-                            <div class="option-letter"><?php echo chr(65 + $index); ?></div>
-                            <div class="option-text"><?php echo $option; ?></div>
-                        </div>
-                        <?php endforeach; ?>
+                        <?php if($data[0]['type'] === 'true_false'): ?>
+                            <div class="true-false-container">
+                                <?php foreach($data[0]['options'] as $index => $option): ?>
+                                <div class="tf-option <?php echo strtolower($option); ?>" data-index="<?php echo $index; ?>">
+                                    <?php echo $option; ?>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <?php foreach($data[0]['options'] as $index => $option): ?>
+                            <div class="quiz-option" data-index="<?php echo $index; ?>">
+                                <div class="option-letter"><?php echo chr(65 + $index); ?></div>
+                                <div class="option-text"><?php echo $option; ?></div>
+                            </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -126,17 +136,34 @@ $data = [
             }
             
             quizOptions.innerHTML = '';
-            wordData[index].options.forEach((option, i) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'quiz-option';
-                optionDiv.dataset.index = i;
-                optionDiv.style.pointerEvents = 'auto';
-                optionDiv.innerHTML = `
-                    <div class="option-letter">${String.fromCharCode(65 + i)}</div>
-                    <div class="option-text">${option}</div>
-                `;
-                quizOptions.appendChild(optionDiv);
-            });
+            const quizContainer = document.querySelector('.quiz-container');
+            if (wordData[index].type === 'true_false') {
+                quizContainer.classList.add('centered');
+                const tfContainer = document.createElement('div');
+                tfContainer.className = 'true-false-container';
+                wordData[index].options.forEach((option, i) => {
+                    const tfOption = document.createElement('div');
+                    tfOption.className = 'tf-option ' + option.toLowerCase();
+                    tfOption.dataset.index = i;
+                    tfOption.style.pointerEvents = 'auto';
+                    tfOption.textContent = option;
+                    tfContainer.appendChild(tfOption);
+                });
+                quizOptions.appendChild(tfContainer);
+            } else {
+                quizContainer.classList.remove('centered');
+                wordData[index].options.forEach((option, i) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'quiz-option';
+                    optionDiv.dataset.index = i;
+                    optionDiv.style.pointerEvents = 'auto';
+                    optionDiv.innerHTML = `
+                        <div class="option-letter">${String.fromCharCode(65 + i)}</div>
+                        <div class="option-text">${option}</div>
+                    `;
+                    quizOptions.appendChild(optionDiv);
+                });
+            }
         }
     }
 
@@ -165,12 +192,12 @@ $data = [
         }
 
         document.addEventListener('click', function(e) {
-            const option = e.target.closest('.quiz-option');
+            const option = e.target.closest('.quiz-option, .tf-option');
             if (option && wordData[currentIndex] && !option.classList.contains('correct') && !option.classList.contains('incorrect')) {
                 const selectedIndex = parseInt(option.dataset.index);
                 const correctIndex = wordData[currentIndex].correct_answer;
                 
-                const allOptions = document.querySelectorAll('.quiz-option');
+                const allOptions = document.querySelectorAll('.quiz-option, .tf-option');
                 allOptions.forEach(opt => {
                     opt.style.pointerEvents = 'none';
                 });

@@ -1715,6 +1715,10 @@ a.card {
     flex: 1;
 }
 
+.quiz-container.centered {
+    justify-content: center;
+}
+
 .quiz-question {
     font-size: 25px;
     font-weight: bold;
@@ -1727,7 +1731,10 @@ a.card {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    flex: 1;
+}
+
+.quiz-container.centered .quiz-options {
+    flex: 0;
 }
 
 .quiz-option {
@@ -1823,4 +1830,45 @@ a.card {
     font-weight: bold;
     text-align: center;
     z-index: 1;
+}
+
+.true-false-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.tf-option {
+    flex: 1;
+    padding: 20px 40px;
+    border-radius: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.tf-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.tf-option.true {
+    background: #4CAF50;
+}
+
+.tf-option.false {
+    background: #F44336;
+}
+
+.tf-option.correct {
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.4);
+}
+
+.tf-option.incorrect {
+    opacity: 0.6;
 }
