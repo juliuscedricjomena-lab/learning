@@ -38,11 +38,11 @@ $data = [
     <div class="content-wrapper">
         <?php startActivityPanel('Activity 5: Guided Sentence Construction', 'Use the hints to build the sentence.'); ?>
             <div class="panel-content-wrapper">
-                <div class="reading-list-container" id="sentenceContainer">
+                <div class="listening-list-container" id="sentenceContainer">
                     <?php foreach($data[0] as $index => $item): ?>
-                        <div class="reading-item-row">
-                            <div class="reading-korean"><?php echo ($index + 1) . '. ' . $item['sentence']; ?></div>
-                            <input type="text" class="reading-input" placeholder="Type your answer here" data-index="<?php echo $index; ?>">
+                        <div class="listening-item-row">
+                            <div class="listening-korean"><?php echo ($index + 1) . '. ' . $item['sentence']; ?></div>
+                            <input type="text" class="listening-input" placeholder="Type your answer here" data-index="<?php echo $index; ?>">
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -85,9 +85,9 @@ let currentPage = 0;
 function updatePage() {
     const container = document.getElementById('sentenceContainer');
     const template = wordData[currentPage].map((item, index) => `
-        <div class="reading-item-row">
-            <div class="reading-korean">${index + 1}. ${item.sentence}</div>
-            <input type="text" class="reading-input" placeholder="Type your answer here" data-index="${index}">
+        <div class="listening-item-row">
+            <div class="listening-korean">${index + 1}. ${item.sentence}</div>
+            <input type="text" class="listening-input" placeholder="Type your answer here" data-index="${index}">
         </div>
     `).join('');
     

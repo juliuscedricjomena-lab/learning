@@ -65,8 +65,8 @@ $data = [
                         <img src="<?php echo BASE_PATH; ?>images/collapse-btn.png" alt="Collapse">
                     </div>
                     <div class="panel-right" id="panelRight">
-                        <div class="reading-title" id="readingTitle"><?php echo $data[0]['title']; ?></div>
-                        <div class="reading-content" id="readingContent"><?php echo $data[0]['content']; ?></div>
+                        <div class="listening-title" id="readingTitle"><?php echo $data[0]['title']; ?></div>
+                        <div class="listening-content" id="readingContent"><?php echo $data[0]['content']; ?></div>
                     </div>
                 </div>
                 <div class="panel-collapsed" id="panelCollapsed" style="display: none;">

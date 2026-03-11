@@ -56,8 +56,8 @@ $data = [
                     <div class="activity-image-container">
                         <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Activity Image" id="activityImage">
                     </div>
-                    <div class="reading-description">
-                        <div class="reading-display" id="sentenceDisplay"><?php echo $data[0]['sentences'][0]['subject'] . ' | ' . $data[0]['sentences'][0]['predicate'] . ' | ' . $data[0]['sentences'][0]['modifier']; ?></div>
+                    <div class="listening-description">
+                        <div class="listening-display" id="sentenceDisplay"><?php echo $data[0]['sentences'][0]['subject'] . ' | ' . $data[0]['sentences'][0]['predicate'] . ' | ' . $data[0]['sentences'][0]['modifier']; ?></div>
                         <textarea id="userInput" class="typing-input" placeholder="Type the sentence here..."></textarea>
                     </div>
                 </div>
@@ -122,7 +122,7 @@ function checkTyping() {
     const userText = userInput.value;
     
     let html = '';
-    html += '<span class="reading-part">';
+    html += '<span class="listening-part">';
     
     for (let i = 0; i < actualSentence.length; i++) {
         const char = actualSentence[i];

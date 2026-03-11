@@ -56,19 +56,19 @@ $data = [
                     <div class="activity-image-container">
                         <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Activity Image" id="activityImage">
                     </div>
-                    <div class="reading-description">
-                        <div class="reading-inputs">
+                    <div class="listening-description">
+                        <div class="listening-inputs">
                             <div class="input-group">
                                 <label>1.</label>
-                                <input type="text" id="input1" class="reading-input" placeholder="Type your answer here">
+                                <input type="text" id="input1" class="listening-input" placeholder="Type your answer here">
                             </div>
                             <div class="input-group">
                                 <label>2.</label>
-                                <input type="text" id="input2" class="reading-input" placeholder="Type your answer here">
+                                <input type="text" id="input2" class="listening-input" placeholder="Type your answer here">
                             </div>
                             <div class="input-group">
                                 <label>3.</label>
-                                <input type="text" id="input3" class="reading-input" placeholder="Type your answer here">
+                                <input type="text" id="input3" class="listening-input" placeholder="Type your answer here">
                             </div>
                         </div>
                     </div>

@@ -9,3 +9,4 @@ services:
       - ./sentence:/var/www/html/sentence
       - ./word:/var/www/html/word
       - ./reading:/var/www/html/reading
+      - ./listening:/var/www/html/listening

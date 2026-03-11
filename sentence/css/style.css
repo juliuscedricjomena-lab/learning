@@ -204,7 +204,7 @@ footer {
     z-index: 1;
 }
 
-.reading-learning {
+.listening-learning {
     position: absolute;
     width: 450px;
     top: 75%;
@@ -735,11 +735,11 @@ a.card {
     position: relative;
 }
 
-.reading-list-logo {
+.listening-list-logo {
     width: 100%;
 }
 
-.reading-list {
+.listening-list {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -748,7 +748,7 @@ a.card {
     margin-left: 15px;
 }
 
-.reading-list li {
+.listening-list li {
     font-weight: bold;
     padding: 10px 0 10px 25px;
     position: relative;
@@ -756,7 +756,7 @@ a.card {
     color: #333;
 }
 
-.reading-list li::before {
+.listening-list li::before {
     content: '';
     position: absolute;
     left: 0;
@@ -768,17 +768,17 @@ a.card {
     background: white;
 }
 
-.reading-list::-webkit-scrollbar {
+.listening-list::-webkit-scrollbar {
     width: 16px;
 }
 
-.reading-list::-webkit-scrollbar-track {
+.listening-list::-webkit-scrollbar-track {
     background: #ccc;
     border-radius: 10px;
     margin: 2px 0;
 }
 
-.reading-list::-webkit-scrollbar-thumb {
+.listening-list::-webkit-scrollbar-thumb {
     /* background: url('../images/icons/scroll-icon.png') center center no-repeat; */
     background: #D76C01;
     background-size: 200%;
@@ -823,7 +823,7 @@ a.card {
     transform: scale(1.1);
 }
 
-.reading-card {
+.listening-card {
     display: flex;
     gap: 0;
     justify-content: center;
@@ -853,7 +853,7 @@ a.card {
     border-radius: 15px !important;
 }
 
-.reading-card-image {
+.listening-card-image {
     flex-shrink: 0;
     background: white;
     padding: 10px;
@@ -863,7 +863,7 @@ a.card {
     align-items: center;
 }
 
-.reading-card-image img {
+.listening-card-image img {
     width: 100%;
     object-fit: cover;
     border-radius: 20px;
@@ -871,7 +871,7 @@ a.card {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.reading-card-text {
+.listening-card-text {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -884,13 +884,13 @@ a.card {
     border-radius: 0 15px 15px 0;
 }
 
-.reading-korean {
+.listening-korean {
     font-size: 75px;
     font-weight: bold;
     color: #333;
 }
 
-.reading-pronounciation {
+.listening-pronounciation {
     font-size: 45px;
     color: #DA6F01;
     font-weight: bold;
@@ -912,7 +912,7 @@ a.card {
     font-weight: bold;
 }
 
-.reading-english {
+.listening-english {
     font-size: 40px;
     color: #666;
 }
@@ -947,7 +947,7 @@ a.card {
     border-radius: 25px;
 }
 
-.reading-description {
+.listening-description {
     flex: 1;
     text-align: left;
     font-size: 25px;
@@ -962,32 +962,32 @@ a.card {
     overflow-x: auto;
 }
 
-.reading-item {
+.listening-item {
     white-space: normal;
     margin-bottom: 20px;
 }
 
-.reading-list-container {
+.listening-list-container {
     display: flex;
     flex-direction: column;
     gap: 30px;
     width: 100%;
 }
 
-.reading-item-row {
+.listening-item-row {
     display: flex;
     flex-direction: column;
     gap: 15px;
     width: 100%;
 }
 
-.reading-korean {
+.listening-korean {
     font-size: 28px;
     font-weight: bold;
     color: #333;
 }
 
-.reading-input {
+.listening-input {
     width: 100%;
     padding: 15px 20px;
     font-size: 22px;
@@ -996,7 +996,7 @@ a.card {
     font-family: 'Lato', sans-serif;
 }
 
-.reading-sentence {
+.listening-sentence {
     text-align: center;
     margin-top: 20px;
     padding: 40px;
@@ -1006,17 +1006,17 @@ a.card {
     line-height: 1.6;
 }
 
-.reading-list li:hover {
+.listening-list li:hover {
     color: #006FFF;
     cursor: pointer;
 }
 
-.reading-list li.active {
+.listening-list li.active {
     color: #006FFF;
     font-weight: bold;
 }
 
-.reading-inputs {
+.listening-inputs {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -1038,7 +1038,7 @@ a.card {
     flex-shrink: 0;
 }
 
-.reading-input {
+.listening-input {
     flex: 1;
     padding: 15px 20px;
     font-size: 22px;
@@ -1102,7 +1102,7 @@ a.card {
     height: 35px;
 }
 
-.play-reading-btn {
+.play-listening-btn {
     background: #EC8F24;
     color: white;
     border: none;
@@ -1118,12 +1118,12 @@ a.card {
     gap: 10px;
 }
 
-.play-reading-icon {
+.play-listening-icon {
     width: 45px;
     height: 35px;
 }
 
-.play-reading-btn:hover {
+.play-listening-btn:hover {
     transform: scale(1.05);
 }
 

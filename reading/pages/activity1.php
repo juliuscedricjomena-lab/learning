@@ -32,9 +32,9 @@ $data = [
                     <div class="activity-image-container">
                         <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Activity Image">
                     </div>
-                    <div class="reading-content-container">
-                        <div class="reading-title"><?php echo $data[0]['title']; ?></div>
-                        <div class="reading-description" id="sentenceDescription">
+                    <div class="listening-content-container">
+                        <div class="listening-title"><?php echo $data[0]['title']; ?></div>
+                        <div class="listening-description" id="sentenceDescription">
                             <?php echo $data[0]['content']; ?>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ let currentIndex = 0;
 
 function updateWord(index) {
     const activityImage = document.querySelector('.activity-image-container img');
-    const readingTitle = document.querySelector('.reading-title');
+    const readingTitle = document.querySelector('.listening-title');
     const sentenceDescription = document.getElementById('sentenceDescription');
     
     if (activityImage && readingTitle && sentenceDescription && wordData[index]) {
