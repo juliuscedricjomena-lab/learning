@@ -1,1 +1,1 @@
-# kids-word-learning
+# kinder-word-learning
