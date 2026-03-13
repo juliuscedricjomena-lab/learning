@@ -55,7 +55,7 @@ prevBtn?.addEventListener('click', () => {
 });
 
 nextBtn?.addEventListener('click', () => {
-    if (currentImage < 3) {
+    if (currentImage < 2) {
         currentImage++;
         img.src = '<?php echo BASE_PATH; ?>images/gallery/image' + currentImage + '.png';
     }

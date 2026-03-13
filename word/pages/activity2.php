@@ -3,77 +3,31 @@ require_once __DIR__ . '/../components/activity-panel.php';
 require_once __DIR__ . '/../components/controls.php';
 
 $data = [
-    [
-        'id' => 1,
-        'image' => 'images/gallery/weather-2.png',
-        'word' => 'weather',
-        'pronunciation' => 'wĕᴛʜ′ər'
-    ],
-    [
-        'id' => 2,
-        'image' => 'images/gallery/satellite.png',
-        'word' => 'satellites',
-        'pronunciation' => 'sat-el-lites'
-    ],
-    [
-        'id' => 3,
-        'image' => 'images/gallery/weather.png',
-        'word' => 'temperature',
-        'pronunciation' => 'tĕmp′ər-ə-chər'
-    ],
-     [
-        'id' => 4,
-        'image' => 'images/gallery/humidity.png',
-        'word' => 'climate',
-        'pronunciation' => 'klī-mət'
-    ],
-    [
-        'id' => 5,
-        'image' => 'images/gallery/weather.png',
-        'word' => 'atmosphere',
-        'pronunciation' => 'ætˈmɒsfɪər'
-    ],
-    [
-        'id' => 6,
-        'image' => 'images/gallery/humidity.png',
-        'word' => 'precipitation',
-        'pronunciation' => 'prɪsɪˈpɪtəʃən'
-    ],
-     [
-        'id' => 7,
-        'image' => 'images/gallery/weather.png',
-        'word' => 'wind',
-        'pronunciation' => 'wɪnd'
-    ],
+    ['word' => 'Laugh', 'options' => ['laugh', 'cry', 'angry'], 'correct' => 'laugh'],
+    ['word' => 'Ride', 'options' => ['swim', 'ride', 'person'], 'correct' => 'ride']
 ];
+
+const IMG_PATH = 'images/gallery/';
+const IMG_EXT = '.png';
 ?>
 <div class="page-content">
     <img src="<?php echo BASE_PATH; ?>images/prev-btn.png" alt="Previous" class="nav-btn">
     <div class="content-wrapper">
-        <?php startActivityPanel('Activity 2: Pronunciation & Chunk', 'Listen and repeat the word twice.'); ?>
-            <div class="panel-content-wrapper">
-                <div class="panel-left">
-                    <div class="word-card h100p" id="wordCard">
-                        <div class="word-card-image">
-                            <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Word" id="wordImage">
-                        </div>
-                        <div class="word-card-text">
-                            <div class="word-pronounciation" id="wordPronunciation"><?php echo $data[0]['pronunciation']; ?></div>
-                            <div class="word-english" id="wordEnglish"><?php echo $data[0]['word']; ?></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-right" id="panelRight">
-                    <img src="<?php echo BASE_PATH; ?>images/word-list.png" alt="Word List" class="word-list-logo">
-                    <img src="<?php echo BASE_PATH; ?>images/collapse-btn.png" alt="Collapse" class="collapse-btn" id="collapseBtn">
-                    <ul class="word-list">
-                        <?php foreach($data as $index => $item): ?>
-                        <li data-index="<?php echo $index; ?>"><?php echo $item['word']; ?></li>
+        <?php startActivityPanel('Activity 2: Listen & Match', 'Listen with your ears. Match it to the right picture.'); ?>
+            <div class="panel-content-wrapper panel-centered">
+                <div class="activity2-container">
+                    <div class="activity2-word" id="currentWord">Laugh</div>
+                    <div class="activity2-options" id="optionsContainer">
+                        <?php 
+                        $labels = ['a.', 'b.', 'c.'];
+                        foreach ($data[0]['options'] as $index => $option): 
+                        ?>
+                            <div class="activity2-option-wrapper">
+                                <div class="activity2-option-label"><?php echo $labels[$index]; ?></div>
+                                <img src="<?php echo BASE_PATH . IMG_PATH . strtolower($option) . IMG_EXT; ?>" alt="<?php echo $option; ?>" class="activity2-option" data-option="<?php echo strtolower($option); ?>">
+                            </div>
                         <?php endforeach; ?>
-                    </ul>
-                </div>
-                <div class="panel-collapsed" id="panelCollapsed" style="display: none;">
-                    <img src="<?php echo BASE_PATH; ?>images/expand-btn.png" alt="Expand" class="expand-btn" id="expandBtn">
+                    </div>
                 </div>
             </div>
         <?php endActivityPanel(); ?>
@@ -108,65 +62,76 @@ $data = [
 </div>
 
 <script>
-const wordData = <?php echo json_encode($data); ?>;
+const prevBtn = document.querySelector('.nav-btn[alt="Previous"]');
+const nextBtn = document.querySelector('.nav-btn[alt="Next"]');
+const wordEl = document.getElementById('currentWord');
+const optionsContainer = document.getElementById('optionsContainer');
+
+const data = <?php echo json_encode($data); ?>;
+const basePath = '<?php echo BASE_PATH . IMG_PATH; ?>';
+const imgExt = '<?php echo IMG_EXT; ?>';
+const basePathRoot = '<?php echo BASE_PATH; ?>';
+const labels = ['a', 'b', 'c'];
+
 let currentIndex = 0;
 
-function updateWord(index) {
-    const wordImage = document.getElementById('wordImage');
-    const wordPronunciation = document.getElementById('wordPronunciation');
-    const wordEnglish = document.getElementById('wordEnglish');
+function loadActivity(index) {
+    const item = data[index];
+    wordEl.textContent = item.word;
     
-    if (wordImage && wordPronunciation && wordEnglish && wordData[index]) {
-        wordImage.src = wordData[index].image;
-        wordPronunciation.textContent = wordData[index].pronunciation;
-        wordEnglish.textContent = wordData[index].word;
-    }
+    optionsContainer.innerHTML = '';
+    item.options.forEach((option, idx) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'activity2-option-wrapper';
+        
+        const label = document.createElement('div');
+        label.className = 'activity2-option-label';
+        label.textContent = labels[idx];
+        
+        const img = document.createElement('img');
+        img.src = basePath + option.toLowerCase() + imgExt;
+        img.alt = option;
+        img.className = 'activity2-option';
+        img.dataset.option = option.toLowerCase();
+        
+        // Click handler function
+        const handleClick = function() {
+            // Check if already answered
+            if (wrapper.querySelector('.activity2-result-icon')) return;
+            
+            const correctAnswer = item.correct.toLowerCase();
+            const isCorrect = option.toLowerCase() === correctAnswer;
+            
+            const resultIcon = document.createElement('img');
+            resultIcon.className = 'activity2-result-icon';
+            resultIcon.src = basePathRoot + 'images/gallery/' + (isCorrect ? 'correct.png' : 'incorrect.png');
+            
+            wrapper.appendChild(resultIcon);
+        };
+        
+        // Add click handler to both image and label
+        img.addEventListener('click', handleClick);
+        label.addEventListener('click', handleClick);
+        
+        wrapper.appendChild(label);
+        wrapper.appendChild(img);
+        optionsContainer.appendChild(wrapper);
+    });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const prevBtn = document.querySelector('.nav-btn[alt="Previous"]');
-    const nextBtn = document.querySelector('.nav-btn[alt="Next"]');
-    const wordListItems = document.querySelectorAll('.word-list li');
-    
-    function setActiveWord(index) {
-        wordListItems.forEach((item, i) => {
-            if (i === index) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-    }
-    
-    setActiveWord(0);
-    
-    wordListItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            currentIndex = index;
-            updateWord(currentIndex);
-            setActiveWord(currentIndex);
-        });
-    });
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateWord(currentIndex);
-                setActiveWord(currentIndex);
-            }
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-            if (currentIndex < wordData.length - 1) {
-                currentIndex++;
-                updateWord(currentIndex);
-                setActiveWord(currentIndex);
-            }
-        });
+prevBtn?.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        loadActivity(currentIndex);
     }
 });
+
+nextBtn?.addEventListener('click', () => {
+    if (currentIndex < data.length - 1) {
+        currentIndex++;
+        loadActivity(currentIndex);
+    }
+});
+
+loadActivity(currentIndex);
 </script>
