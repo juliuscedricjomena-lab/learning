@@ -15,16 +15,16 @@ const IMG_EXT = '.png';
     <div class="content-wrapper">
         <?php startActivityPanel('Activity 2: Listen & Match', 'Listen with your ears. Match it to the right picture.'); ?>
             <div class="panel-content-wrapper panel-centered">
-                <div class="activity2-container">
-                    <div class="activity2-word" id="currentWord">Laugh</div>
-                    <div class="activity2-options" id="optionsContainer">
+                <div class="activity-match-container">
+                    <div class="activity-match-word" id="currentWord">Laugh</div>
+                    <div class="activity-match-options" id="optionsContainer">
                         <?php 
                         $labels = ['a.', 'b.', 'c.'];
                         foreach ($data[0]['options'] as $index => $option): 
                         ?>
-                            <div class="activity2-option-wrapper">
-                                <div class="activity2-option-label"><?php echo $labels[$index]; ?></div>
-                                <img src="<?php echo BASE_PATH . IMG_PATH . strtolower($option) . IMG_EXT; ?>" alt="<?php echo $option; ?>" class="activity2-option" data-option="<?php echo strtolower($option); ?>">
+                            <div class="activity-match-option-wrapper">
+                                <div class="activity-match-option-label"><?php echo $labels[$index]; ?></div>
+                                <img src="<?php echo BASE_PATH . IMG_PATH . strtolower($option) . IMG_EXT; ?>" alt="<?php echo $option; ?>" class="activity-match-option" data-option="<?php echo strtolower($option); ?>">
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -82,28 +82,28 @@ function loadActivity(index) {
     optionsContainer.innerHTML = '';
     item.options.forEach((option, idx) => {
         const wrapper = document.createElement('div');
-        wrapper.className = 'activity2-option-wrapper';
+        wrapper.className = 'activity-match-option-wrapper';
         
         const label = document.createElement('div');
-        label.className = 'activity2-option-label';
+        label.className = 'activity-match-option-label';
         label.textContent = labels[idx];
         
         const img = document.createElement('img');
         img.src = basePath + option.toLowerCase() + imgExt;
         img.alt = option;
-        img.className = 'activity2-option';
+        img.className = 'activity-match-option';
         img.dataset.option = option.toLowerCase();
         
         // Click handler function
         const handleClick = function() {
             // Check if already answered
-            if (wrapper.querySelector('.activity2-result-icon')) return;
+            if (wrapper.querySelector('.activity-match-result-icon')) return;
             
             const correctAnswer = item.correct.toLowerCase();
             const isCorrect = option.toLowerCase() === correctAnswer;
             
             const resultIcon = document.createElement('img');
-            resultIcon.className = 'activity2-result-icon';
+            resultIcon.className = 'activity-match-result-icon';
             resultIcon.src = basePathRoot + 'images/gallery/' + (isCorrect ? 'correct.png' : 'incorrect.png');
             
             wrapper.appendChild(resultIcon);

@@ -997,7 +997,7 @@ a.card {
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s;
-    box-shadow: 0 4px 0 #D46B00;
+    box-shadow: 0 4px 0 #447112;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1022,7 +1022,7 @@ a.card {
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s;
-    box-shadow: 0 4px 0 #D46B00;
+    box-shadow: 0 4px 0 #447112;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1071,6 +1071,15 @@ a.card {
     justify-content: center;
     gap: 30px;
     margin-top: 30px;
+    position: relative;
+}
+
+.rec-indicator {
+    display: none;
+    position: absolute;
+    top: 90px;
+    left: 8%;
+    transform: translateX(-50%);
 }
 
 .rec-btn {
@@ -1083,7 +1092,7 @@ a.card {
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s;
-    box-shadow: 0 4px 0 #D46B00;
+    box-shadow: 0 4px 0 #447112;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1195,7 +1204,7 @@ a.card {
 }
 
 .scoreboard-table {
-    background: #FFC787;
+    background: #D9D9D9;
     border-radius: 20px;
     padding: 10px;
     width: 999px;
@@ -1320,7 +1329,7 @@ a.card {
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s;
-    box-shadow: 0 4px 0 #D46B00;
+    box-shadow: 0 4px 0 #447112;
 }
 
 .submit-btn:hover {
@@ -1348,7 +1357,7 @@ a.card {
     max-height: 600px;
     display: flex;
     flex-direction: column;
-    border: 5px solid #D66C01;
+    border: 5px solid #447112;
 }
 
 .modal-content h2 {
@@ -1375,7 +1384,7 @@ a.card {
     font-size: 16px;
     color: #FFF;
     font-weight: bold;
-    box-shadow: 0 4px 0 #D46B00;
+    box-shadow: 0 4px 0 #447112;
 }
 
 .modal-buttons {
@@ -1406,13 +1415,13 @@ a.card {
 .modal-back {
     background: #86C440;
     color: white;
-    box-shadow: 0 4px 0 #D46B00;
+    box-shadow: 0 4px 0 #447112;
 }
 
 .modal-submit {
     background: #86C440;
     color: white;
-    box-shadow: 0 4px 0 #D46B00;
+    box-shadow: 0 4px 0 #447112;
 }
 
 .modal-btn:hover {
@@ -1462,7 +1471,9 @@ a.card {
     font-weight: bold;
     cursor: pointer;
     outline: none;
-    min-width: 200px;
+    min-width: 400px;
+    max-width: 400px;
+    width: 100%;
 }
 
 .mic-dropdown:hover {
@@ -1569,7 +1580,78 @@ a.card {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-.activity2-container {
+.activity-record-layout {
+    display: flex;
+    gap: 30px;
+    height: 100%;
+}
+
+.activity-record-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.activity-record-image {
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.activity-record-right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.activity-record-words {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: white;
+    border-radius: 25px;
+    padding: 15px 25px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    margin: 0 auto;
+}
+
+.activity-record-english {
+    font-family: 'Fredoka One', cursive;
+    font-size: 50px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.activity-record-korean {
+    font-size: 45px;
+    font-weight: bold;
+    color: white;
+    background: #86C440;
+    padding: 10px 40px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.activity-record-recording {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.activity-match-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1577,7 +1659,7 @@ a.card {
     width: 100%;
 }
 
-.activity2-word {
+.activity-match-word {
     font-family: 'Fredoka One', cursive;
     font-size: 60px;
     color: white;
@@ -1587,13 +1669,13 @@ a.card {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-.activity2-options {
+.activity-match-options {
     display: flex;
     gap: 60px;
     justify-content: center;
 }
 
-.activity2-option-wrapper {
+.activity-match-option-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1601,7 +1683,7 @@ a.card {
     position: relative;
 }
 
-.activity2-result-icon {
+.activity-match-result-icon {
     position: absolute;
     width: 80px;
     top: 50%;
@@ -1611,7 +1693,7 @@ a.card {
     z-index: 10;
 }
 
-.activity2-option-label {
+.activity-match-option-label {
     width: 60px;
     height: 60px;
     background-image: url('../images/gallery/option-circle.png');
@@ -1629,7 +1711,7 @@ a.card {
     cursor: pointer;
 }
 
-.activity2-option {
+.activity-match-option {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -1641,6 +1723,6 @@ a.card {
     padding: 10px;
 }
 
-.activity2-option:hover {
+.activity-match-option:hover {
     transform: translateY(-5px);
 }

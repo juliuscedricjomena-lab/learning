@@ -8,7 +8,9 @@ if (!file_exists($userDir)) {
 
 if (isset($_FILES['audio']) && isset($_POST['word'])) {
     $word = $_POST['word'];
-    $pattern = $userDir . $word . '_*.webm';
+    $activity = isset($_POST['activity']) ? $_POST['activity'] : '';
+    $prefix = $activity ? $activity . '_' . $word : $word;
+    $pattern = $userDir . $prefix . '_*.webm';
     $existingFiles = glob($pattern);
     
     if (count($existingFiles) >= 3) {
@@ -18,7 +20,7 @@ if (isset($_FILES['audio']) && isset($_POST['word'])) {
     
     $nextNumber = count($existingFiles) + 1;
     
-    $fileName = $word . '_' . $nextNumber . '.webm';
+    $fileName = $prefix . '_' . $nextNumber . '.webm';
     $targetPath = $userDir . $fileName;
     
     if (move_uploaded_file($_FILES['audio']['tmp_name'], $targetPath)) {

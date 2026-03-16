@@ -1,71 +1,33 @@
- <?php 
+<?php 
 require_once __DIR__ . '/../components/activity-panel.php';
 require_once __DIR__ . '/../components/controls.php';
 
 $data = [
-    [
-        'id' => 1,
-        'image' => 'images/gallery/weather-2.png',
-        'word' => 'weather'
-    ],
-    [
-        'id' => 2,
-        'image' => 'images/gallery/satellite.png',
-        'word' => 'satellites'
-    ],
-    [
-        'id' => 3,
-        'image' => 'images/gallery/weather.png',
-        'word' => 'temperature'
-    ],
-    [
-        'id' => 4,
-        'image' => 'images/gallery/humidity.png',
-        'word' => 'climate'
-    ],
-    [
-        'id' => 5,
-        'image' => 'images/gallery/weather.png',
-        'word' => 'atmosphere'
-    ],
-    [
-        'id' => 6,
-        'image' => 'images/gallery/humidity.png',
-        'word' => 'precipitation'
-    ],
-    [
-        'id' => 7,
-        'image' => 'images/gallery/weather.png',
-        'word' => 'wind'
-    ],
+    ['word' => 'Laugh', 'options' => ['cat', 'toy', 'laugh2'], 'correct' => 'laugh2'],
+    ['word' => 'Ride', 'options' => ['ride2', 'dog', 'read'], 'correct' => 'ride2']
 ];
+
+const IMG_PATH = 'images/gallery/';
+const IMG_EXT = '.png';
 ?>
 <div class="page-content">
     <img src="<?php echo BASE_PATH; ?>images/prev-btn.png" alt="Previous" class="nav-btn">
     <div class="content-wrapper">
-        <?php startActivityPanel('Activity 4: Guided Writing', 'Type the missing letters.'); ?>
-            <div class="panel-content-wrapper">
-                <div class="panel-left expanded">
-                    <div class="word-card h100p" id="wordCard">
-                        <div class="word-card-image w40p">
-                            <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Word" id="wordImage">
-                        </div>
-                        <div class="word-card-text">
-                            <div class="fill-blanks-word" id="fillBlanksWord"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-right" id="panelRight" style="display: none;">
-                    <img src="<?php echo BASE_PATH; ?>images/word-list.png" alt="Word List" class="word-list-logo">
-                    <img src="<?php echo BASE_PATH; ?>images/collapse-btn.png" alt="Collapse" class="collapse-btn" id="collapseBtn">
-                    <ul class="word-list">
-                        <?php foreach($data as $index => $item): ?>
-                        <li data-index="<?php echo $index; ?>"><?php echo $item['word']; ?></li>
+        <?php startActivityPanel('Activity 4: Sound Choice', 'Listen to the sound and choose the correct picture'); ?>
+            <div class="panel-content-wrapper panel-centered">
+                <div class="activity-match-container">
+                    <div class="activity-match-word" id="currentWord"><h3 class="opacity-50"><?php echo $data[0]['word']; ?></h3></div>
+                    <div class="activity-match-options" id="optionsContainer">
+                        <?php 
+                        $labels = ['a.', 'b.', 'c.'];
+                        foreach ($data[0]['options'] as $index => $option): 
+                        ?>
+                            <div class="activity-match-option-wrapper">
+                                <div class="activity-match-option-label"><?php echo $labels[$index]; ?></div>
+                                <img src="<?php echo BASE_PATH . IMG_PATH . strtolower($option) . IMG_EXT; ?>" alt="<?php echo $option; ?>" class="activity-match-option" data-option="<?php echo strtolower($option); ?>">
+                            </div>
                         <?php endforeach; ?>
-                    </ul>
-                </div>
-                <div class="panel-collapsed" id="panelCollapsed" style="display: flex;">
-                    <img src="<?php echo BASE_PATH; ?>images/expand-btn.png" alt="Expand" class="expand-btn" id="expandBtn">
+                    </div>
                 </div>
             </div>
         <?php endActivityPanel(); ?>
@@ -100,123 +62,76 @@ $data = [
 </div>
 
 <script>
-const wordData = <?php echo json_encode($data); ?>;
+const prevBtn = document.querySelector('.nav-btn[alt="Previous"]');
+const nextBtn = document.querySelector('.nav-btn[alt="Next"]');
+const wordEl = document.getElementById('currentWord');
+const optionsContainer = document.getElementById('optionsContainer');
+
+const data = <?php echo json_encode($data); ?>;
+const basePath = '<?php echo BASE_PATH . IMG_PATH; ?>';
+const imgExt = '<?php echo IMG_EXT; ?>';
+const basePathRoot = '<?php echo BASE_PATH; ?>';
+const labels = ['a', 'b', 'c'];
+
 let currentIndex = 0;
-const answers = {};
 
-function createFillBlanks(word, index) {
-    const container = document.getElementById('fillBlanksWord');
-    container.innerHTML = '';
+function loadActivity(index) {
+    const item = data[index];
+    wordEl.innerHTML = '<h3 class="opacity-50">' + item.word + '</h3>';
     
-    for (let i = 0; i < word.length; i++) {
-        if (i === 1 || i === word.length - 3) {
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.maxLength = 1;
-            input.className = 'blank-input';
-            input.dataset.correct = word[i].toLowerCase();
-            input.dataset.position = i;
-            input.addEventListener('input', handleBlankInput);
+    optionsContainer.innerHTML = '';
+    item.options.forEach((option, idx) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'activity-match-option-wrapper';
+        
+        const label = document.createElement('div');
+        label.className = 'activity-match-option-label';
+        label.textContent = labels[idx];
+        
+        const img = document.createElement('img');
+        img.src = basePath + option.toLowerCase() + imgExt;
+        img.alt = option;
+        img.className = 'activity-match-option';
+        img.dataset.option = option.toLowerCase();
+        
+        // Click handler function
+        const handleClick = function() {
+            // Check if already answered
+            if (wrapper.querySelector('.activity-match-result-icon')) return;
             
-            if (answers[index] && answers[index][i]) {
-                input.value = answers[index][i].value;
-                input.style.background = answers[index][i].background;
-                input.style.color = answers[index][i].color;
-            }
+            const correctAnswer = item.correct.toLowerCase();
+            const isCorrect = option.toLowerCase() === correctAnswer;
             
-            container.appendChild(input);
-        } else {
-            const span = document.createElement('span');
-            span.textContent = word[i];
-            span.className = 'letter-span';
-            container.appendChild(span);
-        }
-    }
-}
-
-function handleBlankInput(e) {
-    const input = e.target;
-    const value = input.value.toLowerCase();
-    const correct = input.dataset.correct;
-    const position = input.dataset.position;
-    
-    if (!answers[currentIndex]) answers[currentIndex] = {};
-    
-    if (value) {
-        if (value === correct) {
-            input.style.background = '#4CAF50';
-            input.style.color = 'white';
-        } else {
-            input.style.background = '#F44336';
-            input.style.color = 'white';
-        }
-        answers[currentIndex][position] = {
-            value: value,
-            background: input.style.background,
-            color: input.style.color
+            const resultIcon = document.createElement('img');
+            resultIcon.className = 'activity-match-result-icon';
+            resultIcon.src = basePathRoot + 'images/gallery/' + (isCorrect ? 'correct.png' : 'incorrect.png');
+            
+            wrapper.appendChild(resultIcon);
         };
-    } else {
-        input.style.background = 'white';
-        input.style.color = '#333';
-        delete answers[currentIndex][position];
-    }
-}
-
-function updateWord(index) {
-    const wordImage = document.getElementById('wordImage');
-    
-    if (wordImage && wordData[index]) {
-        wordImage.src = wordData[index].image;
-        createFillBlanks(wordData[index].word, index);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const prevBtn = document.querySelector('.nav-btn[alt="Previous"]');
-    const nextBtn = document.querySelector('.nav-btn[alt="Next"]');
-    const wordListItems = document.querySelectorAll('.word-list li');
-    
-    createFillBlanks(wordData[0].word, 0);
-    
-    function setActiveWord(index) {
-        wordListItems.forEach((item, i) => {
-            if (i === index) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-    }
-    
-    setActiveWord(0);
-    
-    wordListItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            currentIndex = index;
-            updateWord(currentIndex);
-            setActiveWord(currentIndex);
-        });
+        
+        // Add click handler to both image and label
+        img.addEventListener('click', handleClick);
+        label.addEventListener('click', handleClick);
+        
+        wrapper.appendChild(label);
+        wrapper.appendChild(img);
+        optionsContainer.appendChild(wrapper);
     });
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateWord(currentIndex);
-                setActiveWord(currentIndex);
-            }
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-            if (currentIndex < wordData.length - 1) {
-                currentIndex++;
-                updateWord(currentIndex);
-                setActiveWord(currentIndex);
-            }
-        });
+}
+
+prevBtn?.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        loadActivity(currentIndex);
     }
 });
+
+nextBtn?.addEventListener('click', () => {
+    if (currentIndex < data.length - 1) {
+        currentIndex++;
+        loadActivity(currentIndex);
+    }
+});
+
+loadActivity(currentIndex);
 </script>
