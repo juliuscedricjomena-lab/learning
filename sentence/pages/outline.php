@@ -8,73 +8,58 @@
     </div>
 </div>
 <div class="page-content">
-    <div class="grid grid-cols-2 gap-4">
-        <div class="flex flex-col gap-4">
-            <a href="<?php echo BASE_PATH; ?>?page=activity1" class="card">
-                <div class="card-image-left">
-                    <img src="<?php echo BASE_PATH; ?>images/icons/anchor.png" alt="Vocabulary Anchor">
+    <div class="category-grid">
+        <a href="<?php echo BASE_PATH; ?>?page=activity1" class="category-card">
+            <div class="category-badge">Activity 1</div>
+            <img src="<?php echo BASE_PATH; ?>images/category-card.png" alt="Category" class="category-bg">
+            <div class="category-content">
+                <div class="category-left">
+                    <div class="category-title">Story<br>&emsp;&emsp;Meaning</div>
                 </div>
-                <div class="card-label-right">
-                    <h3>Activity 1</h3>
-                    <p>Vocabulary Anchor </p>
+                <div class="category-right">
+                    <img src="<?php echo BASE_PATH; ?>images/story-meaning.png" alt="Avatar">
                 </div>
-            </a>
-            <a href="<?php echo BASE_PATH; ?>?page=activity2" class="card">
-                <div class="card-image-left">
-                    <img src="<?php echo BASE_PATH; ?>images/icons/eye.png" alt="Phrase Awareness">
+                <img src="<?php echo BASE_PATH; ?>images/next-btn.png" alt="Next" class="category-next-btn">
+            </div>
+        </a>
+        <a href="<?php echo BASE_PATH; ?>?page=activity2" class="category-card">
+            <div class="category-badge">Activity 2</div>
+            <img src="<?php echo BASE_PATH; ?>images/category-card.png" alt="Category" class="category-bg">
+            <div class="category-content">
+                <div class="category-left">
+                    <div class="category-title">Listen &<br>&emsp;&emsp;Match</div>
                 </div>
-                <div class="card-label-right">
-                    <h3>Activity 2</h3>
-                    <p>Phrase Awareness</p>
+                <div class="category-right">
+                    <img src="<?php echo BASE_PATH; ?>images/picture-match.png" alt="Avatar">
                 </div>
-            </a>
-            <a href="<?php echo BASE_PATH; ?>?page=activity3" class="card">
-                <div class="card-image-left">
-                    <img src="<?php echo BASE_PATH; ?>images/icons/head.png" alt="Phrase Practice">
+                <img src="<?php echo BASE_PATH; ?>images/next-btn.png" alt="Next" class="category-next-btn">
+            </div>
+        </a>
+        <a href="<?php echo BASE_PATH; ?>?page=activity3" class="category-card">
+            <div class="category-badge">Activity 3</div>
+            <img src="<?php echo BASE_PATH; ?>images/category-card.png" alt="Category" class="category-bg">
+            <div class="category-content">
+                <div class="category-left">
+                    <div class="category-title">Copy<br>&emsp;&emsp;Cat Say</div>
                 </div>
-                <div class="card-label-right">
-                    <h3>Activity 3</h3>
-                    <p>Phrase Practice</p>
+                <div class="category-right">
+                    <img src="<?php echo BASE_PATH; ?>images/true-or-false.png" alt="Avatar">
                 </div>
-            </a>
-            <a href="<?php echo BASE_PATH; ?>?page=activity4" class="card">
-                <div class="card-image-left">
-                    <img src="<?php echo BASE_PATH; ?>images/icons/write.png" alt="Phrase Recall Writing">
+                <img src="<?php echo BASE_PATH; ?>images/next-btn.png" alt="Next" class="category-next-btn">
+            </div>
+        </a>
+        <a href="<?php echo BASE_PATH; ?>?page=activity4" class="category-card">
+            <div class="category-badge">Activity 4</div>
+            <img src="<?php echo BASE_PATH; ?>images/category-card.png" alt="Category" class="category-bg">
+            <div class="category-content">
+                <div class="category-left">
+                    <div class="category-title">Sound<br>&emsp;&emsp;Choice</div>
                 </div>
-                <div class="card-label-right">
-                    <h3>Activity 4</h3>
-                    <p>Phrase Recall Writing</p>
+                <div class="category-right">
+                    <img src="<?php echo BASE_PATH; ?>images/picture-choice.png" alt="Avatar">
                 </div>
-            </a>
-        </div>
-        <div class="flex flex-col gap-4">
-            <a href="<?php echo BASE_PATH; ?>?page=activity5" class="card">
-                <div class="card-image-left">
-                    <img src="<?php echo BASE_PATH; ?>images/icons/tools.png" alt="Guided Sentence Construction">
-                </div>
-                <div class="card-label-right">
-                    <h3>Activity 5</h3>
-                    <p>Guided Sentence Construction</p>
-                </div>
-            </a>
-            <a href="<?php echo BASE_PATH; ?>?page=activity6" class="card">
-                <div class="card-image-left">
-                    <img src="<?php echo BASE_PATH; ?>images/icons/recall.png" alt="Sentence Order Recall">
-                </div>
-                <div class="card-label-right">
-                    <h3>Activity 6</h3>
-                    <p>Sentence Order Recall</p>
-                </div>
-            </a>
-            <a href="<?php echo BASE_PATH; ?>?page=activity7" class="card">
-                <div class="card-image-left">
-                    <img src="<?php echo BASE_PATH; ?>images/icons/blocks.png" alt="Retention Review">
-                </div>
-                <div class="card-label-right">
-                    <h3>Activity 7</h3>
-                    <p>Retention Review</p>
-                </div>
-            </a>
-        </div>
+                <img src="<?php echo BASE_PATH; ?>images/next-btn.png" alt="Next" class="category-next-btn">
+            </div>
+        </a>
     </div>
 </div>

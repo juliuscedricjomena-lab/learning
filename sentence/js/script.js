@@ -1,4 +1,4 @@
-console.log('Kids Sentence Learning loaded');
+console.log('Kinder Sentence Learning loaded');
 
 window.addEventListener('load', () => {
     const loader = document.getElementById('loader');
@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
     if (slider) {
         function updateSlider() {
             const value = (slider.value - slider.min) / (slider.max - slider.min) * 100;
-            slider.style.background = `linear-gradient(to right, #E88D24 0%, #E88D24 ${value}%, #ccc ${value}%, #ccc 100%)`;
+            slider.style.background = `linear-gradient(to right, #86C441 0%, #86C441 ${value}%, #ccc ${value}%, #ccc 100%)`;
         }
         slider.addEventListener('input', updateSlider);
         updateSlider();
@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
     if (itemsSlider && itemsValue) {
         function updateItemsSlider() {
             const value = (itemsSlider.value - itemsSlider.min) / (itemsSlider.max - itemsSlider.min) * 100;
-            itemsSlider.style.background = `linear-gradient(to right, #E88D24 0%, #E88D24 ${value}%, #ccc ${value}%, #ccc 100%)`;
+            itemsSlider.style.background = `linear-gradient(to right, #86C441 0%, #86C441 ${value}%, #ccc ${value}%, #ccc 100%)`;
             itemsValue.textContent = itemsSlider.value;
             const sliderWidth = itemsSlider.offsetWidth;
             const thumbWidth = 32;

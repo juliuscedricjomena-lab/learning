@@ -4,14 +4,3 @@ RewriteBase /sentence/
 # Enable error display for debugging (remove in production)
 php_flag display_errors On
 php_value error_reporting E_ALL
-
-# Allow access to recordings directory
-<Directory "recordings">
-    Options +Indexes
-    Require all granted
-</Directory>
-
-# Allow access to all files
-<FilesMatch "\.(php|html|css|js|png|jpg|jpeg|gif|svg|mp3|webm)$">
-    Require all granted
-</FilesMatch>

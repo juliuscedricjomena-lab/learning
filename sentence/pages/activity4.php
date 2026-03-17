@@ -3,48 +3,31 @@ require_once __DIR__ . '/../components/activity-panel.php';
 require_once __DIR__ . '/../components/controls.php';
 
 $data = [
-    [
-        [
-            'id' => 1,
-            'sentence' => '기상학자는 날씨를 연구하는 과학자이다.'
-        ],
-        [
-            'id' => 2,
-            'sentence' => '컴퓨터는 날씨를 예측하는 데 매우 중요하다.'
-        ],
-        [
-            'id' => 3,
-            'sentence' => '날씨 예보는 사람들을 안전하게 지켜준다.'
-        ]
-    ],
-    [
-        [
-            'id' => 4,
-            'sentence' => '태양은 동쪽에서 뜬다.'
-        ],
-        [
-            'id' => 5,
-            'sentence' => '새들은 아침에 아름답게 노래한다.'
-        ],
-        [
-            'id' => 6,
-            'sentence' => '아이들은 공원에서 행복하게 논다.'
-        ]
-    ]
+    ['word' => 'Laugh', 'options' => ['cat', 'toy', 'laugh2'], 'correct' => 'laugh2'],
+    ['word' => 'Ride', 'options' => ['ride2', 'dog', 'read'], 'correct' => 'ride2']
 ];
+
+const IMG_PATH = 'images/gallery/';
+const IMG_EXT = '.png';
 ?>
 <div class="page-content">
     <img src="<?php echo BASE_PATH; ?>images/prev-btn.png" alt="Previous" class="nav-btn">
     <div class="content-wrapper">
-        <?php startActivityPanel('Activity 4: Phrase Recall Writing', 'Write the English phrase that matches the meaning.'); ?>
-            <div class="panel-content-wrapper">
-                <div class="listening-list-container" id="sentenceContainer">
-                    <?php foreach($data[0] as $index => $item): ?>
-                        <div class="listening-item-row">
-                            <div class="listening-korean"><?php echo ($index + 1) . '. ' . $item['sentence']; ?></div>
-                            <input type="text" class="listening-input" placeholder="Type your answer here" data-index="<?php echo $index; ?>">
-                        </div>
-                    <?php endforeach; ?>
+        <?php startActivityPanel('Activity 4: Sound Choice', 'Listen to the sound and choose the correct picture'); ?>
+            <div class="panel-content-wrapper panel-centered">
+                <div class="activity-match-container">
+                    <div class="activity-match-word" id="currentWord"><h3 class="opacity-50"><?php echo $data[0]['word']; ?></h3></div>
+                    <div class="activity-match-options" id="optionsContainer">
+                        <?php 
+                        $labels = ['a.', 'b.', 'c.'];
+                        foreach ($data[0]['options'] as $index => $option): 
+                        ?>
+                            <div class="activity-match-option-wrapper">
+                                <div class="activity-match-option-label"><?php echo $labels[$index]; ?></div>
+                                <img src="<?php echo BASE_PATH . IMG_PATH . strtolower($option) . IMG_EXT; ?>" alt="<?php echo $option; ?>" class="activity-match-option" data-option="<?php echo strtolower($option); ?>">
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         <?php endActivityPanel(); ?>
@@ -79,41 +62,76 @@ $data = [
 </div>
 
 <script>
-const wordData = <?php echo json_encode($data); ?>;
-let currentPage = 0;
+const prevBtn = document.querySelector('.nav-btn[alt="Previous"]');
+const nextBtn = document.querySelector('.nav-btn[alt="Next"]');
+const wordEl = document.getElementById('currentWord');
+const optionsContainer = document.getElementById('optionsContainer');
 
-function updatePage() {
-    const container = document.getElementById('sentenceContainer');
-    const template = wordData[currentPage].map((item, index) => `
-        <div class="listening-item-row">
-            <div class="listening-korean">${index + 1}. ${item.sentence}</div>
-            <input type="text" class="listening-input" placeholder="Type your answer here" data-index="${index}">
-        </div>
-    `).join('');
+const data = <?php echo json_encode($data); ?>;
+const basePath = '<?php echo BASE_PATH . IMG_PATH; ?>';
+const imgExt = '<?php echo IMG_EXT; ?>';
+const basePathRoot = '<?php echo BASE_PATH; ?>';
+const labels = ['a', 'b', 'c'];
+
+let currentIndex = 0;
+
+function loadActivity(index) {
+    const item = data[index];
+    wordEl.innerHTML = '<h3 class="opacity-50">' + item.word + '</h3>';
     
-    container.innerHTML = template;
+    optionsContainer.innerHTML = '';
+    item.options.forEach((option, idx) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'activity-match-option-wrapper';
+        
+        const label = document.createElement('div');
+        label.className = 'activity-match-option-label';
+        label.textContent = labels[idx];
+        
+        const img = document.createElement('img');
+        img.src = basePath + option.toLowerCase() + imgExt;
+        img.alt = option;
+        img.className = 'activity-match-option';
+        img.dataset.option = option.toLowerCase();
+        
+        // Click handler function
+        const handleClick = function() {
+            // Check if already answered
+            if (wrapper.querySelector('.activity-match-result-icon')) return;
+            
+            const correctAnswer = item.correct.toLowerCase();
+            const isCorrect = option.toLowerCase() === correctAnswer;
+            
+            const resultIcon = document.createElement('img');
+            resultIcon.className = 'activity-match-result-icon';
+            resultIcon.src = basePathRoot + 'images/gallery/' + (isCorrect ? 'correct.png' : 'incorrect.png');
+            
+            wrapper.appendChild(resultIcon);
+        };
+        
+        // Add click handler to both image and label
+        img.addEventListener('click', handleClick);
+        label.addEventListener('click', handleClick);
+        
+        wrapper.appendChild(label);
+        wrapper.appendChild(img);
+        optionsContainer.appendChild(wrapper);
+    });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const prevBtn = document.querySelector('.nav-btn[alt="Previous"]');
-    const nextBtn = document.querySelector('.nav-btn[alt="Next"]');
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-            if (currentPage > 0) {
-                currentPage--;
-                updatePage();
-            }
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-            if (currentPage < wordData.length - 1) {
-                currentPage++;
-                updatePage();
-            }
-        });
+prevBtn?.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        loadActivity(currentIndex);
     }
 });
+
+nextBtn?.addEventListener('click', () => {
+    if (currentIndex < data.length - 1) {
+        currentIndex++;
+        loadActivity(currentIndex);
+    }
+});
+
+loadActivity(currentIndex);
 </script>

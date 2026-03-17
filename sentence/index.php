@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-define('BASE_PATH', '/sentence/'); // Adjust this if your project is in a subdirectory
+define('BASE_PATH', '/sentence/');
 
 // Debug: Check if images folder exists
 if (!is_dir('images')) {
