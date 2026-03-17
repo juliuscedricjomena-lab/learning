@@ -729,6 +729,7 @@ a.card {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 340px;
 }
 
 .panel-left {
@@ -1227,7 +1228,7 @@ a.card {
 
 .scoreboard-header {
     display: grid;
-    grid-template-columns: 80px 1fr 150px 200px;
+    grid-template-columns: 80px 1fr 150px;
     gap: 10px;
     font-weight: bold;
     color: white;
@@ -1237,7 +1238,7 @@ a.card {
 
 .scoreboard-row {
     display: grid;
-    grid-template-columns: 80px 1fr 150px 200px;
+    grid-template-columns: 80px 1fr 150px;
     gap: 10px;
     font-size: 18px;
     margin-bottom: 10px;
@@ -1260,6 +1261,10 @@ a.card {
     background: white;
 }
 
+.scoreboard-feedback-icon {
+    width: 40px;
+}
+
 .scoreboard-container {
     background: white;
     border-radius: 20px;
@@ -1273,25 +1278,31 @@ a.card {
 
 .scoreboard-title {
     position: absolute;
-    top: -50px;
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
     background: #86C440;
     color: white;
     padding: 10px 40px;
-    border-radius: 20px;
+    border-radius: 15px;
     font-size: 24px;
     font-weight: bold;
 }
 
 .scoreboard-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
     margin-bottom: 10px;
-    width: 80%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.info-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .info-header {
@@ -1303,11 +1314,8 @@ a.card {
     left: -15px;
 }
 
-.info-row {
-    display: contents;
-}
-
 .info-col {
+    flex: 1;
     background: #ffffff;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
@@ -1317,7 +1325,6 @@ a.card {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-right: 30px;
 }
 
 .info-input {
@@ -1675,10 +1682,10 @@ a.card {
 
 .activity-match-word {
     font-family: 'Fredoka One', cursive;
-    font-size: 60px;
+    font-size: 30px;
     color: white;
     background: #86C440;
-    padding: 20px 80px;
+    padding: 15px 50px;
     border-radius: 50px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
@@ -1699,9 +1706,9 @@ a.card {
 
 .activity-match-result-icon {
     position: absolute;
-    width: 80px;
+    width: 100px;
     top: 50%;
-    left: 70%;
+    left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 10;
@@ -1726,8 +1733,8 @@ a.card {
 }
 
 .activity-match-option {
-    width: 100px;
-    height: 100px;
+    width: 250px;
+    height: 180px;
     object-fit: cover;
     background: white;
     border-radius: 20px;
@@ -1739,4 +1746,74 @@ a.card {
 
 .activity-match-option:hover {
     transform: translateY(-5px);
+}
+
+.tf-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    width: 100%;
+    height: 100%;
+}
+
+.tf-question {
+    font-size: 20px;
+    color: white;
+    background: #86C440;
+    padding: 20px 50px;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.tf-buttons {
+    display: flex;
+    gap: 100px;
+}
+
+.tf-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 28px;
+    color: white;
+    padding: 15px 60px;
+    border-radius: 50px;
+    border: 4px solid #C7D4DE;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.tf-btn:hover {
+    transform: scale(1.05);
+}
+
+.tf-true {
+    background: #86C440;
+}
+
+.tf-false {
+    background: #E74C3C;
+}
+
+.tf-correct {
+    box-shadow: 0 0 0 4px gold, 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.tf-wrong {
+    opacity: 0.5;
+}
+
+.tf-btn-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.tf-result-icon {
+    width: 60px;
+    position: absolute;
+    right: -70px;
+    top: 50%;
+    transform: translateY(-50%);
 }

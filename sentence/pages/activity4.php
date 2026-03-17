@@ -3,8 +3,8 @@ require_once __DIR__ . '/../components/activity-panel.php';
 require_once __DIR__ . '/../components/controls.php';
 
 $data = [
-    ['word' => 'Laugh', 'options' => ['cat', 'toy', 'laugh2'], 'correct' => 'laugh2'],
-    ['word' => 'Ride', 'options' => ['ride2', 'dog', 'read'], 'correct' => 'ride2']
+    ['word' => 'Fireflies glowing in the dark sky.', 'options' => ['image3', 'image11'], 'correct' => 'image3'],
+    ['word' => 'Fireflies glowing in the dark sky.', 'options' => ['image3', 'image12'], 'correct' => 'image3']
 ];
 
 const IMG_PATH = 'images/gallery/';
@@ -13,17 +13,15 @@ const IMG_EXT = '.png';
 <div class="page-content">
     <img src="<?php echo BASE_PATH; ?>images/prev-btn.png" alt="Previous" class="nav-btn">
     <div class="content-wrapper">
-        <?php startActivityPanel('Activity 4: Sound Choice', 'Listen to the sound and choose the correct picture'); ?>
+        <?php startActivityPanel('Activity 4: Picture Choice', 'Look at the sentence and choose the matching '); ?>
             <div class="panel-content-wrapper panel-centered">
                 <div class="activity-match-container">
-                    <div class="activity-match-word" id="currentWord"><h3 class="opacity-50"><?php echo $data[0]['word']; ?></h3></div>
+                    <div class="activity-match-word" id="currentWord">Fireflies glowing in the dark sky.</div>
                     <div class="activity-match-options" id="optionsContainer">
                         <?php 
-                        $labels = ['a.', 'b.', 'c.'];
                         foreach ($data[0]['options'] as $index => $option): 
                         ?>
                             <div class="activity-match-option-wrapper">
-                                <div class="activity-match-option-label"><?php echo $labels[$index]; ?></div>
                                 <img src="<?php echo BASE_PATH . IMG_PATH . strtolower($option) . IMG_EXT; ?>" alt="<?php echo $option; ?>" class="activity-match-option" data-option="<?php echo strtolower($option); ?>">
                             </div>
                         <?php endforeach; ?>
@@ -77,16 +75,12 @@ let currentIndex = 0;
 
 function loadActivity(index) {
     const item = data[index];
-    wordEl.innerHTML = '<h3 class="opacity-50">' + item.word + '</h3>';
+    wordEl.textContent = item.word;
     
     optionsContainer.innerHTML = '';
     item.options.forEach((option, idx) => {
         const wrapper = document.createElement('div');
         wrapper.className = 'activity-match-option-wrapper';
-        
-        const label = document.createElement('div');
-        label.className = 'activity-match-option-label';
-        label.textContent = labels[idx];
         
         const img = document.createElement('img');
         img.src = basePath + option.toLowerCase() + imgExt;
@@ -94,26 +88,18 @@ function loadActivity(index) {
         img.className = 'activity-match-option';
         img.dataset.option = option.toLowerCase();
         
-        // Click handler function
-        const handleClick = function() {
-            // Check if already answered
+        img.addEventListener('click', function() {
             if (wrapper.querySelector('.activity-match-result-icon')) return;
             
-            const correctAnswer = item.correct.toLowerCase();
-            const isCorrect = option.toLowerCase() === correctAnswer;
+            const isCorrect = option.toLowerCase() === item.correct.toLowerCase();
             
             const resultIcon = document.createElement('img');
             resultIcon.className = 'activity-match-result-icon';
             resultIcon.src = basePathRoot + 'images/gallery/' + (isCorrect ? 'correct.png' : 'incorrect.png');
             
             wrapper.appendChild(resultIcon);
-        };
+        });
         
-        // Add click handler to both image and label
-        img.addEventListener('click', handleClick);
-        label.addEventListener('click', handleClick);
-        
-        wrapper.appendChild(label);
         wrapper.appendChild(img);
         optionsContainer.appendChild(wrapper);
     });

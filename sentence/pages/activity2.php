@@ -3,8 +3,8 @@ require_once __DIR__ . '/../components/activity-panel.php';
 require_once __DIR__ . '/../components/controls.php';
 
 $data = [
-    ['word' => 'Laugh', 'options' => ['laugh', 'cry', 'angry'], 'correct' => 'laugh'],
-    ['word' => 'Ride', 'options' => ['swim', 'ride', 'person'], 'correct' => 'ride']
+    ['word' => 'Which picture shows glowing fireflies?', 'options' => ['image3', 'image9', 'image10'], 'correct' => 'image3'],
+    ['word' => 'Which picture shows glowing fireflies?', 'options' => ['image4', 'image5', 'image6'], 'correct' => 'image5']
 ];
 
 const IMG_PATH = 'images/gallery/';
@@ -13,17 +13,15 @@ const IMG_EXT = '.png';
 <div class="page-content">
     <img src="<?php echo BASE_PATH; ?>images/prev-btn.png" alt="Previous" class="nav-btn">
     <div class="content-wrapper">
-        <?php startActivityPanel('Activity 2: Listen & Match', 'Listen with your ears. Match it to the right picture.'); ?>
+        <?php startActivityPanel('Activity 2: Picture Match', 'Read the question and choose the matching picture.'); ?>
             <div class="panel-content-wrapper panel-centered">
                 <div class="activity-match-container">
-                    <div class="activity-match-word" id="currentWord">Laugh</div>
+                    <div class="activity-match-word" id="currentWord">Which picture shows glowing fireflies?</div>
                     <div class="activity-match-options" id="optionsContainer">
                         <?php 
-                        $labels = ['a.', 'b.', 'c.'];
                         foreach ($data[0]['options'] as $index => $option): 
                         ?>
                             <div class="activity-match-option-wrapper">
-                                <div class="activity-match-option-label"><?php echo $labels[$index]; ?></div>
                                 <img src="<?php echo BASE_PATH . IMG_PATH . strtolower($option) . IMG_EXT; ?>" alt="<?php echo $option; ?>" class="activity-match-option" data-option="<?php echo strtolower($option); ?>">
                             </div>
                         <?php endforeach; ?>
@@ -84,36 +82,24 @@ function loadActivity(index) {
         const wrapper = document.createElement('div');
         wrapper.className = 'activity-match-option-wrapper';
         
-        const label = document.createElement('div');
-        label.className = 'activity-match-option-label';
-        label.textContent = labels[idx];
-        
         const img = document.createElement('img');
         img.src = basePath + option.toLowerCase() + imgExt;
         img.alt = option;
         img.className = 'activity-match-option';
         img.dataset.option = option.toLowerCase();
         
-        // Click handler function
-        const handleClick = function() {
-            // Check if already answered
+        img.addEventListener('click', function() {
             if (wrapper.querySelector('.activity-match-result-icon')) return;
             
-            const correctAnswer = item.correct.toLowerCase();
-            const isCorrect = option.toLowerCase() === correctAnswer;
+            const isCorrect = option.toLowerCase() === item.correct.toLowerCase();
             
             const resultIcon = document.createElement('img');
             resultIcon.className = 'activity-match-result-icon';
             resultIcon.src = basePathRoot + 'images/gallery/' + (isCorrect ? 'correct.png' : 'incorrect.png');
             
             wrapper.appendChild(resultIcon);
-        };
+        });
         
-        // Add click handler to both image and label
-        img.addEventListener('click', handleClick);
-        label.addEventListener('click', handleClick);
-        
-        wrapper.appendChild(label);
         wrapper.appendChild(img);
         optionsContainer.appendChild(wrapper);
     });
