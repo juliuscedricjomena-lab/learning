@@ -6,37 +6,35 @@ $data = [
     [
         'id' => 1,
         'image' => 'images/gallery/image1.png',
-        'title' => 'How Meteorologists Predict Weather',
-        'content' => 'A meteorologist is a scientist who studies weather and the atmosphere. They collect data from satellites, weather balloons, and radar. This information helps them understand temperature, wind, and humidity. Using it, they make forecasts about upcoming weather.A meteorologist is a scientist who studies weather and the atmosphere. They collect data from satellites, weather balloons, and radar. This information helps them understand temperature, wind, and humidity. Using it, they make forecasts about upcoming weather. A meteorologist is a scientist who studies weather and the atmosphere. They collect data from satellites, weather balloons, and radar. This information helps them understand temperature, wind, and humidity. Using it, they make forecasts about upcoming weather.'
+        'title' => 'SPARKLING NIGHT BUGS',
+        'sentence' => 'Inside their tails, a special light is made. A chemical called luciferin helps them glow. When air mixes in, the light shines brightly.'
     ],
     [
         'id' => 2,
         'image' => 'images/gallery/image2.png',
-        'title' => 'How Meteorologists Predict Weather',
-        'content' => 'Computers are very important for predicting the weather. Meteorologists use special programs that model the movement of air and clouds. These programs show where rain or storms may form. The data is updated often to give accurate reports.'
+        'title' => 'SPARKLING NIGHT BUGS',
+        'sentence' => 'At night, tiny fireflies light up the sky. Their bodies shine softly in the dark night. They look like stars dancing in the air.'
     ],
     [
         'id' => 3,
         'image' => 'images/gallery/image3.png',
-        'title' => 'How Meteorologists Predict Weather',
-        'content' => 'Weather forecasting helps keep people safe. It guides pilots, farmers, and rescue teams in their work. By studying climate change, meteorologists learn how global warming affects the Earth. Their research helps us prepare for extreme weather in the future.'
+        'title' => 'SPARKLING NIGHT BUGS',
+        'sentence' => 'Fireflies use their glow to talk and find friends. Each one has its own flashing pattern. That is how they share messages in the night.'
     ]
 ];
 ?>
 <div class="page-content">
     <img src="<?php echo BASE_PATH; ?>images/prev-btn.png" alt="Previous" class="nav-btn">
     <div class="content-wrapper">
-        <?php startActivityPanel('Activity 1: Read to Learn', 'Use your ears to hear and learn the story.'); ?>
+        <?php startActivityPanel('Activity 1:  Story Meaning', 'Read the sentence and remember the meaning.'); ?>
             <div class="panel-content-wrapper">
-                <div class="activity-content-flex">
+                <div class="activity-content-grid">
                     <div class="activity-image-container">
-                        <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Activity Image">
+                        <img src="<?php echo BASE_PATH . $data[0]['image']; ?>" alt="Activity Image" id="activityImage">
                     </div>
-                    <div class="listening-content-container">
-                        <div class="listening-title"><?php echo $data[0]['title']; ?></div>
-                        <div class="listening-description" id="sentenceDescription">
-                            <?php echo $data[0]['content']; ?>
-                        </div>
+                    <div class="reading-content-container">
+                        <div class="reading-title" id="sentenceTitle"><?php echo $data[0]['title']; ?></div>
+                        <div class="reading-description" id="sentenceText"></div>
                     </div>
                 </div>
             </div>
@@ -72,41 +70,28 @@ $data = [
 </div>
 
 <script>
-const wordData = <?php echo json_encode($data); ?>;
+const sentenceData = <?php echo json_encode($data); ?>;
 let currentIndex = 0;
 
-function updateWord(index) {
-    const activityImage = document.querySelector('.activity-image-container img');
-    const readingTitle = document.querySelector('.listening-title');
-    const sentenceDescription = document.getElementById('sentenceDescription');
-    
-    if (activityImage && readingTitle && sentenceDescription && wordData[index]) {
-        activityImage.src = '<?php echo BASE_PATH; ?>' + wordData[index].image;
-        readingTitle.textContent = wordData[index].title;
-        sentenceDescription.textContent = wordData[index].content;
-    }
+function updateActivity() {
+    const item = sentenceData[currentIndex];
+    document.getElementById('activityImage').src = '<?php echo BASE_PATH; ?>' + item.image;
+    document.getElementById('sentenceTitle').textContent = item.title;
+    document.getElementById('sentenceText').textContent = item.sentence;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.querySelector('.nav-btn[alt="Previous"]');
     const nextBtn = document.querySelector('.nav-btn[alt="Next"]');
     
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateWord(currentIndex);
-            }
-        });
-    }
+    updateActivity();
     
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-            if (currentIndex < wordData.length - 1) {
-                currentIndex++;
-                updateWord(currentIndex);
-            }
-        });
-    }
+    prevBtn?.addEventListener('click', () => {
+        if (currentIndex > 0) { currentIndex--; updateActivity(); }
+    });
+    
+    nextBtn?.addEventListener('click', () => {
+        if (currentIndex < sentenceData.length - 1) { currentIndex++; updateActivity(); }
+    });
 });
 </script>

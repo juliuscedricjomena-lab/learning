@@ -16,13 +16,6 @@ $allowed = [
     'activity1',
     'activity2',
     'activity3',
-    'activity4',
-    'activity5',
-    'activity6',
-    'activity7',
-    'activity8',
-    'activity9',
-    'activity10',
     'scoreboard'
 ];
 $page = in_array($page, $allowed) ? $page : 'cover';

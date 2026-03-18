@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="screen-orientation" content="landscape">
-    <title>Kids Reading Learning</title>
+    <title>Kinder Reading Learning</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/fredoka-one" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/sigmar-one" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/anonymous-pro" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/knewave" rel="stylesheet">
 
     <link rel="stylesheet" href="<?php echo BASE_PATH; ?>css/style.css">
     <style>#loader{display:flex;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:10000;justify-content:center;align-items:center;}</style>
@@ -25,7 +29,7 @@
     <header>
         <div class="header-title">
             <img src="<?php echo BASE_PATH; ?>images/header-background.png" alt="Header" class="header-bg">
-            <span class="header-text">Sentence Learning</span>
+            <span class="header-text">Reading Learning</span>
         </div>
         <div class="tag-container">
             <img src="<?php echo BASE_PATH; ?>images/tag-background.png" alt="Tag" class="tag-bg">
@@ -48,10 +52,10 @@
         </div>
         <?php endif; ?>
         <div class="top-actions">
-            <div class="action-btn action-btn-folder">
+            <div class="action-btn action-btn-radius action-btn-folder">
                 <img src="<?php echo BASE_PATH; ?>images/icons/folder.png" alt="Folder">
             </div>
-            <div class="action-btn action-btn-gear">
+            <div class="action-btn action-btn-radius action-btn-gear">
                 <img src="<?php echo BASE_PATH; ?>images/icons/gear.png" alt="Settings">
             </div>
         </div>

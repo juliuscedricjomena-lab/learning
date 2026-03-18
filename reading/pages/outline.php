@@ -8,32 +8,44 @@
     </div>
 </div>
 <div class="page-content">
-    <div class="flex flex-col gap-4 items-center">
-        <a href="<?php echo BASE_PATH; ?>?page=activity1" class="card">
-            <div class="card-image-left">
-                <img src="<?php echo BASE_PATH; ?>images/icons/write.png" alt="Read to Learn">
-            </div>
-            <div class="card-label-right">
-                <h3>Activity 1</h3>
-                <p>Read to Learn</p>
-            </div>
-        </a>
-        <a href="<?php echo BASE_PATH; ?>?page=activity2" class="card">
-            <div class="card-image-left">
-                <img src="<?php echo BASE_PATH; ?>images/icons/eye.png" alt="Comprehension Check">
-            </div>
-            <div class="card-label-right">
-                <h3>Activity 2</h3>
-                <p>Comprehension Check</p>
+    <div class="category-grid">
+        <a href="<?php echo BASE_PATH; ?>?page=activity1" class="category-card">
+            <div class="category-badge">Activity 1</div>
+            <img src="<?php echo BASE_PATH; ?>images/category-card.png" alt="Category" class="category-bg">
+            <div class="category-content">
+                <div class="category-left">
+                    <div class="category-title">Read to<br>&emsp;&emsp;Learn</div>
+                </div>
+                <div class="category-right">
+                    <img src="<?php echo BASE_PATH; ?>images/read-to-learn.png" alt="Avatar">
+                </div>
+                <img src="<?php echo BASE_PATH; ?>images/next-btn.png" alt="Next" class="category-next-btn">
             </div>
         </a>
-        <a href="<?php echo BASE_PATH; ?>?page=activity3" class="card">
-            <div class="card-image-left">
-                <img src="<?php echo BASE_PATH; ?>images/icons/head.png" alt="Memory Check">
+        <a href="<?php echo BASE_PATH; ?>?page=activity2" class="category-card">
+            <div class="category-badge">Activity 2</div>
+            <img src="<?php echo BASE_PATH; ?>images/category-card.png" alt="Category" class="category-bg">
+            <div class="category-content">
+                <div class="category-left">
+                    <div class="category-title">Comprehension<br>&emsp;&emsp;Check</div>
+                </div>
+                <div class="category-right">
+                    <img src="<?php echo BASE_PATH; ?>images/comprehension-check.png" alt="Avatar">
+                </div>
+                <img src="<?php echo BASE_PATH; ?>images/next-btn.png" alt="Next" class="category-next-btn">
             </div>
-            <div class="card-label-right">
-                <h3>Activity 3</h3>
-                <p>Memory Check</p>
+        </a>
+        <a href="<?php echo BASE_PATH; ?>?page=activity3" class="category-card">
+            <div class="category-badge">Activity 3</div>
+            <img src="<?php echo BASE_PATH; ?>images/category-card.png" alt="Category" class="category-bg">
+            <div class="category-content">
+                <div class="category-left">
+                    <div class="category-title">Memory<br>&emsp;&emsp;Check</div>
+                </div>
+                <div class="category-right">
+                    <img src="<?php echo BASE_PATH; ?>images/memory-check.png" alt="Avatar">
+                </div>
+                <img src="<?php echo BASE_PATH; ?>images/next-btn.png" alt="Next" class="category-next-btn">
             </div>
         </a>
     </div>

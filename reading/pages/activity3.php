@@ -1,13 +1,36 @@
 <?php 
 require_once __DIR__ . '/../components/activity-panel.php';
 require_once __DIR__ . '/../components/controls.php';
+
+$data = [
+    [
+        'id' => 1,
+        'question' => 'Fireflies glow at day.',
+        'correct' => false,
+    ],
+    [
+        'id' => 2,
+        'question' => 'Fireflies use their glow to talk and find friends.',
+        'correct' => true
+    ]
+];
 ?>
 <div class="page-content">
     <img src="<?php echo BASE_PATH; ?>images/prev-btn.png" alt="Previous" class="nav-btn">
     <div class="content-wrapper">
-        <?php startActivityPanel('Activity 3: Memory Check', 'Think about the story and tell me what you remember.'); ?>
+        <?php startActivityPanel('Activity 3: True or False', 'Read the sentence and say if it is true or false.'); ?>
             <div class="panel-content-wrapper panel-centered">
-                <img src="<?php echo BASE_PATH; ?>images/gallery/image1.png" alt="Activity Image" class="gallery-image">
+                <div class="tf-container">
+                    <div class="tf-question" id="tfQuestion"><?php echo $data[0]['question']; ?></div>
+                    <div class="tf-buttons">
+                        <div class="tf-btn-wrapper">
+                            <button class="tf-btn tf-true" id="btnTrue">True</button>
+                        </div>
+                        <div class="tf-btn-wrapper">
+                            <button class="tf-btn tf-false" id="btnFalse">False</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         <?php endActivityPanel(); ?>
         <?php startControls(); ?>
@@ -41,23 +64,45 @@ require_once __DIR__ . '/../components/controls.php';
 </div>
 
 <script>
-const prevBtn = document.querySelector('.nav-btn[alt="Previous"]');
-const nextBtn = document.querySelector('.nav-btn[alt="Next"]');
-const img = document.querySelector('.panel-content-wrapper img');
+const BASE_PATH = '<?php echo BASE_PATH; ?>';
+const tfData = <?php echo json_encode($data); ?>;
+let currentIndex = 0;
 
-let currentImage = 1;
+function updateQuestion() {
+    document.getElementById('tfQuestion').textContent = tfData[currentIndex].question;
+    document.getElementById('btnTrue').classList.remove('tf-correct', 'tf-wrong');
+    document.getElementById('btnFalse').classList.remove('tf-correct', 'tf-wrong');
+    document.querySelectorAll('.tf-result-icon').forEach(el => el.remove());
+}
 
-prevBtn?.addEventListener('click', () => {
-    if (currentImage > 1) {
-        currentImage--;
-        img.src = '<?php echo BASE_PATH; ?>images/gallery/image' + currentImage + '.png';
-    }
-});
+function checkAnswer(answer) {
+    const isCorrect = tfData[currentIndex].correct === answer;
+    const btnTrue = document.getElementById('btnTrue');
+    const btnFalse = document.getElementById('btnFalse');
+    
+    btnTrue.classList.remove('tf-correct', 'tf-wrong');
+    btnFalse.classList.remove('tf-correct', 'tf-wrong');
+    document.querySelectorAll('.tf-result-icon').forEach(el => el.remove());
+    
+    const clickedBtn = answer ? btnTrue : btnFalse;
+    clickedBtn.classList.add(isCorrect ? 'tf-correct' : 'tf-wrong');
+    
+    const icon = document.createElement('img');
+    icon.className = 'tf-result-icon';
+    icon.src = BASE_PATH + 'images/gallery/' + (isCorrect ? 'correct.png' : 'incorrect.png');
+    clickedBtn.parentElement.appendChild(icon);
+}
 
-nextBtn?.addEventListener('click', () => {
-    if (currentImage < 4) {
-        currentImage++;
-        img.src = '<?php echo BASE_PATH; ?>images/gallery/image' + currentImage + '.png';
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('btnTrue').addEventListener('click', () => checkAnswer(true));
+    document.getElementById('btnFalse').addEventListener('click', () => checkAnswer(false));
+    
+    document.querySelector('.nav-btn[alt="Previous"]')?.addEventListener('click', () => {
+        if (currentIndex > 0) { currentIndex--; updateQuestion(); }
+    });
+    
+    document.querySelector('.nav-btn[alt="Next"]')?.addEventListener('click', () => {
+        if (currentIndex < tfData.length - 1) { currentIndex++; updateQuestion(); }
+    });
 });
 </script>
